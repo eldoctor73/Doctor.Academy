@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +8,105 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* لون خلفية منقوش */
         }
         h1 {
+            color: #333;
+            margin-top: 50px;
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .header-box {
+            background-color: #8e44ad; /* لون خلفية بوكس العنوان */
+            padding: 20px;
+        }
+        .header-text {
+            color: white; /* لون النص */
+            font-size: 36px; /* حجم النص */
+            font-weight: bold; /* وزن النص */
+            transform: skewY(-5deg); /* ميل النص */
+            display: inline-block; /* عرض النص كبلوك مستقل */
+        }
+        .app-update {
+            background-color: #d1f5e1; /* لون خلفية بوكس التحديثات */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .app-update h2 {
             color: #333;
         }
         .update-link {
             margin-top: 20px;
         }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
+    <div class="header-box">
+        <span class="header-text">أكاديمية الدكتور</span>
+    </div>
     <h1>تحديثات التطبيقات</h1>
+
+    <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
-        <div class="update-link">
-            <a href="رابط_التحديث">تحميل التحديث</a>
-            <!-- هنا يمكنك إضافة الرابط المباشر للتحديث -->
-            <!-- على سبيل المثال: -->
-            <!-- <a href="رابط_التحديث">تحديث جديد</a> -->
-        </div>
+        <form action="submit_prayer_times.php" method="post">
+            <input type="text" id="prayer_times" name="prayer_times" placeholder="أضف لينك التحميل"><br>
+            <input type="submit" value="تحميل التحديث">
+        </form>
     </div>
+
+    <!-- تحميلات اليوتيوب -->
+    <div class="app-update">
+        <h2>تحميلات اليوتيوب</h2>
+        <form action="submit_youtube_downloads.php" method="post">
+            <input type="text" id="youtube_downloads" name="youtube_downloads" placeholder="أضف لينك التحميل"><br>
+            <input type="submit" value="تحميل التحديث">
+        </form>
+    </div>
+
+    <!-- لعبة Hangman -->
+    <div class="app-update">
+        <h2>لعبة Hangman</h2>
+        <form action="submit_hangman_game.php" method="post">
+            <input type="text" id="hangman_game" name="hangman_game" placeholder="أضف لينك التحميل"><br>
+            <input type="submit" value="تحميل التحديث">
+        </form>
+    </div>
+
+    <!-- البرنامج الخامس -->
+    <div class="app-update">
+        <h2>البرنامج الخامس</h2>
+        <form action="submit_fifth_app.php" method="post">
+            <input type="text" id="fifth_app" name="fifth_app" placeholder="أضف لينك التحميل"><br>
+            <input type="submit" value="تحميل التحديث">
+        </form>
+    </div>
+
 </body>
 </html>
