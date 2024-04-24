@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link rel="icon" href="eldoctor.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحة التحديثات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* لون خلفية منقوش */
+        }
+        .header-box {
+            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
+            padding: 20px;
+            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
+            position: relative; /* لتمكين التحكم في الموقع */
+        }
+        .header-text {
+            color: Black; /* لون النص */
+            font-size: 40px; /* حجم النص */
+            font-weight: bold; /* وزن النص */
+            display: inline; /* إزالة التائه للنص */
+            position: absolute; /* لتمكين التحكم في الموقع */
+            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
+            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
+            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
+        }
+        .logo-image {
+            max-width: 200px; /* تحديد الحد الأقصى للعرض */
+            margin-bottom: 10px; /* تباعد بين الصورة والعنوان */
+        }
+        .date-time-info {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box">
+        <img src="eldoctor.png" alt="أكاديمية" class="logo-image">
+        <div class="header-text">التحديثات الطبية</div>
+        <div class="date-time-info" id="date-time-info">
+            <span id="gregorian-date"></span><br>
+            <span id="hijri-date"></span><br>
+            <span id="current-time"></span>
+        </div>
+    </div>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -126,6 +170,30 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
+<script>
+        function updateDateTime() {
+            const now = new Date();
+            const gregorianDateElement = document.getElementById("gregorian-date");
+            const hijriDateElement = document.getElementById("hijri-date");
+            const currentTimeElement = document.getElementById("current-time");
 
+            // تحديث التاريخ الميلادي
+            gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
+
+            // تحديث التاريخ الهجري
+            // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
+            hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
+
+            // تحديث الوقت الحالي
+            currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
+        }
+
+        // تحديث الوقت والتاريخ كل ثانية
+        setInterval(updateDateTime, 1000);
+
+        // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
+        updateDateTime();
+    </script>
 </body>
+</html>    
 </html>
