@@ -164,7 +164,7 @@
 
   function recordDownload(appName) {
     const db = firebase.firestore();
-    const docRef = db.collection('downloads').doc('count');
+    const docRef = db.collection('downloads').doc('Downloads');
 
     db.runTransaction(transaction => {
       // This code may get re-run multiple times if there are conflicts.
