@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <script src="https://apis.google.com/js/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eldoctor Academy</title>
@@ -135,6 +134,14 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const gregorianDateElement = document.getElementById("gregorian-date");
+            const hijriDateElement = document.getElementById("hijri-date");
+            const currentTimeElement = document.getElementById("current-time");
+
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
