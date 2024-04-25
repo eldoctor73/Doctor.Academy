@@ -6,41 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eldoctor Academy</title>
     <link rel="icon" href="eldoctor.ico" type="image/x-icon"> <!-- هنا يتم إضافة الأيقونة -->
-    <!-- باقي الأكواد هنا -->
-
-    <!-- Google Analytics Code -->
-    <script>
-        function loadAnalytics() {
-            gapi.load('client:auth2', initAnalytics);
-        }
-
-        function initAnalytics() {
-            gapi.client.init({
-                'apiKey': 'AIzaSyBhGQv-Z7KGTiSXiHSR5RIFKHxh8anw5wU'
-            }).then(function () {
-                return gapi.client.request({
-                    'path': 'https://www.googleapis.com/analytics/v3/data/ga',
-                    'method': 'GET',
-                    'params': {
-                        'ids': 'ga:G-KB9J9TLY5N',
-                        'start-date': '30daysAgo',
-                        'end-date': 'today',
-                        'metrics': 'ga:totalEvents',
-                        'dimensions': 'ga:eventAction',
-                        'filters': 'ga:eventCategory==Downloads'
-                    }
-                });
-            }).then(function (response) {
-                var downloads = response.result.totalsForAllResults['ga:totalEvents'];
-                document.getElementById("downloads").textContent = "عدد التحميلات: " + downloads;
-            }, function (reason) {
-                console.log('Error: ' + reason.result.error.message);
-            });
-        }
-
-        loadAnalytics();
-    </script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,54 +37,6 @@
         .date-time-info {
             font-size: 18px;
             margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="header-box">
-        <img src="eldoctor.png" alt="" class="logo-image">
-        
-        <div class="date-time-info" id="date-time-info">
-            <span id="gregorian-date"></span><br>
-            <span id="hijri-date"></span><br>
-            <span id="current-time"></span>
-        </div>
-    </div>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff; /* لون خلفية منقوش */
-        }
-        h1 {
-            color: #333;
-            margin-top: 20px;
-            font-size: 48px;
-            font-weight: bold;
-        }
-        .header-box {
-            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
-            padding: 20px;
-            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
-            position: relative; /* لتمكين التحكم في الموقع */
-        }
-        .header-text {
-            color: Black; /* لون النص */
-            font-size: 40px; /* حجم النص */
-            font-weight: bold; /* وزن النص */
-            display: inline; /* إزالة التائه للنص */
-            position: absolute; /* لتمكين التحكم في الموقع */
-            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
-            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
-            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
-
-        }
-        .logo-image {
-            max-width: 200px; /* تحديد الحد الأقصى للعرض */
-            margin-bottom: 10px; /* تباعد بين الصورة والعنوان */
         }
         .app-update {
             border-radius: 10px;
@@ -169,9 +86,18 @@
     </style>
 </head>
 <body>
+    <div class="header-box">
+        <img src="eldoctor.png" alt="" class="logo-image">
+        
+        <div class="date-time-info" id="date-time-info">
+            <span id="gregorian-date"></span><br>
+            <span id="hijri-date"></span><br>
+            <span id="current-time"></span>
+        </div>
+    </div>
+
     <h1>تحديثات التطبيقات</h1>
 
-    <!-- مواقيت الصلاة -->
     <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
@@ -181,10 +107,8 @@
         <form action="submit_prayer_times.php" method="post">
             <span id="prayer_times"> الله اكبر </span>
         </form>
-        <span id="downloads"></span> <!-- هنا سيتم عرض عدد التحميلات -->
+        <span id="downloads"></span>
     </div>
-
-
 
     <!-- تحميلات اليوتيوب -->
     <div class="app-update">
@@ -209,29 +133,51 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-<script>
+
+    <script>
+        function loadAnalytics() {
+            gapi.load('client:auth2', initAnalytics);
+        }
+
+        function initAnalytics() {
+            gapi.client.init({
+                'apiKey': 'AIzaSyBhGQv-Z7KGTiSXiHSR5RIFKHxh8anw5wU'
+            }).then(function () {
+                return gapi.client.request({
+                    'path': 'https://www.googleapis.com/analytics/v3/data/ga',
+                    'method': 'GET',
+                    'params': {
+                        'ids': 'ga:G-KB9J9TLY5N', // استبدال XXXXXXXXXX بمعرّف علامة Google الصحيح
+                        'start-date': '30daysAgo',
+                        'end-date': 'today',
+                        'metrics': 'ga:totalEvents',
+                        'dimensions': 'ga:eventAction',
+                        'filters': 'ga:eventCategory==Downloads'
+                    }
+                });
+            }).then(function (response) {
+                var downloads = response.result.totalsForAllResults['ga:totalEvents'];
+                document.getElementById("downloads").textContent = "عدد التحميلات: " + downloads;
+            }, function (reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }
+
+        loadAnalytics();
+
         function updateDateTime() {
             const now = new Date();
             const gregorianDateElement = document.getElementById("gregorian-date");
             const hijriDateElement = document.getElementById("hijri-date");
             const currentTimeElement = document.getElementById("current-time");
 
-            // تحديث التاريخ الميلادي
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
-
-            // تحديث التاريخ الهجري
-            // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
-
-            // تحديث الوقت الحالي
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
         }
 
-        // تحديث الوقت والتاريخ كل ثانية
         setInterval(updateDateTime, 1000);
-
-        // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
         updateDateTime();
     </script>
 </body>
-</html>    
+</html>
