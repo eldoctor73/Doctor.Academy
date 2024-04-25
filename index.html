@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <!-- تعيين اللغة وتعيين الترميز -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- عنوان الصفحة -->
-    <title>Eldoctor Academy</title>
-    <!-- رابط لرمز الصفحة -->
-    <link rel="icon" href="eldoctor.ico" type="image/x-icon">
-    <!-- أسلوب CSS -->
+    <title>صفحة التحديثات</title>
     <style>
-        /* أسلوب CSS هنا */<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <!-- تعيين اللغة وتعيين الترميز -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- عنوان الصفحة -->
-    <title>Eldoctor Academy</title>
-    <!-- رابط لرمز الصفحة -->
-    <link rel="icon" href="eldoctor.ico" type="image/x-icon">
-    <!-- أسلوب CSS -->
-    <style>
-        /* أسلوب CSS هنا */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* لون خلفية منقوش */
+        }
+        .header-box {
+            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
+            padding: 20px;
+            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
+            position: relative; /* لتمكين التحكم في الموقع */
+        }
+        .header-text {
+            color: Black; /* لون النص */
+            font-size: 40px; /* حجم النص */
+            font-weight: bold; /* وزن النص */
+            display: inline; /* إزالة التائه للنص */
+            position: absolute; /* لتمكين التحكم في الموقع */
+            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
+            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
+            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
+        }
+        .logo-image {
+            max-width: 200px; /* تحديد الحد الأقصى للعرض */
+            margin-bottom: 10px; /* تباعد بين الصورة والعنوان */
+        }
+        .date-time-info {
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <!-- العنوان والشعار -->
     <div class="header-box">
-        <img src="eldoctor.png" alt="" class="logo-image">
-        
+        <img src="eldoctor.png" alt="أكاديمية" class="logo-image">
+        <div class="header-text">التحديثات الطبية</div>
         <div class="date-time-info" id="date-time-info">
             <span id="gregorian-date"></span><br>
             <span id="hijri-date"></span><br>
@@ -37,226 +49,151 @@
         </div>
     </div>
 
-    <!-- عنوان الصفحة -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* لون خلفية منقوش */
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .header-box {
+            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
+            padding: 20px;
+            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
+            position: relative; /* لتمكين التحكم في الموقع */
+        }
+        .header-text {
+            color: Black; /* لون النص */
+            font-size: 40px; /* حجم النص */
+            font-weight: bold; /* وزن النص */
+            display: inline; /* إزالة التائه للنص */
+            position: absolute; /* لتمكين التحكم في الموقع */
+            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
+            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
+            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
+
+        }
+        .logo-image {
+            max-width: 200px; /* تحديد الحد الأقصى للعرض */
+            margin-bottom: 10px; /* تباعد بين الصورة والعنوان */
+        }
+        .app-update {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .app-update h2 {
+            color: #333;
+        }
+        .update-link {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        a {
+            color: purple; /* تغيير لون الروابط إلى اللون الأزرق */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* ألوان البوكسات */
+        .app-update:nth-child(odd) {
+            background-color: #b3e5fc; /* لون البوكسات الفردية (أزرق فاتح) */
+        }
+        .app-update:nth-child(even) {
+            background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box">
+        <img src="eldoctor.png" alt=" أكاديمية " class="logo-image"> <!-- تعديل هنا -->
+    </div>
     <h1>تحديثات التطبيقات</h1>
 
-    <!-- قسم مواقيت الصلاة -->
+    <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
-        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk" onclick="recordDownload('prayer_times')">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
-        <br><br>
-        <a href="https://drive.usercontent.google.com/download?id=1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z&amp;export=download&amp;authuser=0&amp;confirm=t&amp;uuid=de80ae65-3e0f-4e03-b592-2400b8c89d86&amp;at=APZUnTXKwMa3TOOqrPYbl8DuaYBT:1713987658227" onclick="recordDownload('prayer_times_pc')">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
-        <br><br>
-        <span id="prayer_times_count"> عدد التحميلات: 0 </span>
-        <br>
-        <span id="prayer_times"> الله اكبر </span>
-    </div>
-
-    <!-- قسم تحميلات اليوتيوب -->
-    <div class="app-update">
-        <h2>تحميلات اليوتيوب</h2>
-        <br><br>
-        <span id="youtube_count"> عدد التحميلات: 0 </span>
-        <br>
-        <span id="youtube"> الله اكبر </span>
-    </div>
-
-    <!-- قسم لعبة Hangman -->
-    <div class="app-update">
-        <h2>لعبة Hangman</h2>
-        <br>
-        <span id="hangman_count"> عدد التحميلات: 0 </span>
-        <span id="hangman"> الله اكبر </span>
-    </div>
-
-    <!-- قسم البرنامج الخامس -->
-    <div class="app-update">
-        <h2>البرنامج الخامس</h2>
-        <form action="submit_fifth_app.php" method="post">
-            <br><br>
-            <span id="program5_count"> عدد التحميلات: 0 </span>
+        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة</a>
+        <form action="submit_prayer_times.php" method="post">
+            <span id="prayer_times"> الله اكبر </span>
         </form>
     </div>
 
-    <!-- تضمين SDKs من Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js"></script>
+    <!-- تحميلات اليوتيوب -->
+    <div class="app-update">
+        <h2>تحميلات اليوتيوب</h2>
+        <a href="">احدث اصدار رابط  تحميل اليوتيوب</a>
+        <form action="submit_youtube_downloads.php" method="post">
+            <span id="youtub"> الله اكبر </span>
+        </form>
+    </div>
 
-    <script>
-        // بيانات تهيئة Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
-            authDomain: "eldoctor-data-base.firebaseapp.com",
-            projectId: "eldoctor-data-base",
-            storageBucket: "eldoctor-data-base.appspot.com",
-            messagingSenderId: "364533727761",
-            appId: "1:364533727761:web:36532f50b84493a7bc67b0",
-            measurementId: "G-TF4XEQPN2G"
-        };
+    <!-- لعبة Hangman -->
+    <div class="app-update">
+        <h2>لعبة Hangman</h2>
+        <form action="submit_hangman_game.php" method="post">
+            <span id="hangman"> الله اكبر </span>
+        </form>
+    </div>
 
-        // تهيئة Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
-
-        // دالة لتسجيل التنزيل
-        function recordDownload(appName) {
-            const db = firebase.firestore();
-            const docRef = db.collection('downloads').doc('Downloads');
-
-            db.runTransaction(transaction => {
-                // يمكن أن يتم تشغيل هذا الكود مرارًا وتكرارًا إذا كانت هناك تضاربات.
-                return transaction.get(docRef).then(doc => {
-                    if (!doc.exists) {
-                        throw "Document does not exist!";
-                    }
-
-                    const data = doc.data();
-                    let count = data[appName] || 0;
-                    count++;
-
-                    transaction.update(docRef, { [appName]: count });
-                });
-            }).then(() => {
-                console.log("Transaction successfully committed!");
-            }).catch(error => {
-                console.log("Transaction failed: ", error);
-            });
-        }
-
-        // تحديث الوقت بشكل دوري
+    <!-- البرنامج الخامس -->
+    <div class="app-update">
+        <h2>البرنامج الخامس</h2>
+        <form action="submit_fifth_app.php" method="post">
+            <span id="program5"> الله اكبر </span>
+        </form>
+    </div>
+<script>
         function updateDateTime() {
             const now = new Date();
             const gregorianDateElement = document.getElementById("gregorian-date");
             const hijriDateElement = document.getElementById("hijri-date");
             const currentTimeElement = document.getElementById("current-time");
 
+            // تحديث التاريخ الميلادي
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
+
+            // تحديث التاريخ الهجري
+            // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
+
+            // تحديث الوقت الحالي
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
         }
 
-        // تحديث الوقت كل ثانية
+        // تحديث الوقت والتاريخ كل ثانية
         setInterval(updateDateTime, 1000);
-        // تحديث الوقت لأول مرة عند تحميل الصفحة
+
+        // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
         updateDateTime();
     </script>
 </body>
 </html>
-
-    </style>
-</head>
-<body>
-    <!-- العنوان والشعار -->
-    <div class="header-box">
-        <img src="eldoctor.png" alt="" class="logo-image">
-        
-        <div class="date-time-info" id="date-time-info">
-            <span id="gregorian-date"></span><br>
-            <span id="hijri-date"></span><br>
-            <span id="current-time"></span>
-        </div>
-    </div>
-
-    <!-- عنوان الصفحة -->
-    <h1>تحديثات التطبيقات</h1>
-
-    <!-- قسم مواقيت الصلاة -->
-    <div class="app-update">
-        <h2>مواقيت الصلاة</h2>
-        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk" onclick="recordDownload('prayer_times')">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
-        <br><br>
-        <a href="https://drive.usercontent.google.com/download?id=1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z&amp;export=download&amp;authuser=0&amp;confirm=t&amp;uuid=de80ae65-3e0f-4e03-b592-2400b8c89d86&amp;at=APZUnTXKwMa3TOOqrPYbl8DuaYBT:1713987658227" onclick="recordDownload('prayer_times_pc')">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
-        <br><br>
-        <span id="prayer_times_count"> عدد التحميلات: 0 </span>
-        <br>
-        <span id="prayer_times"> الله اكبر </span>
-    </div>
-
-    <!-- قسم تحميلات اليوتيوب -->
-    <div class="app-update">
-        <h2>تحميلات اليوتيوب</h2>
-        <br><br>
-        <span id="youtube_count"> عدد التحميلات: 0 </span>
-        <br>
-        <span id="youtube"> الله اكبر </span>
-    </div>
-
-    <!-- قسم لعبة Hangman -->
-    <div class="app-update">
-        <h2>لعبة Hangman</h2>
-        <br>
-        <span id="hangman_count"> عدد التحميلات: 0 </span>
-        <span id="hangman"> الله اكبر </span>
-    </div>
-
-    <!-- قسم البرنامج الخامس -->
-    <div class="app-update">
-        <h2>البرنامج الخامس</h2>
-        <form action="submit_fifth_app.php" method="post">
-            <br><br>
-            <span id="program5_count"> عدد التحميلات: 0 </span>
-        </form>
-    </div>
-
-    <!-- تضمين SDKs من Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics.js"></script>
-
-    <script>
-        // بيانات تهيئة Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
-            authDomain: "eldoctor-data-base.firebaseapp.com",
-            projectId: "eldoctor-data-base",
-            storageBucket: "eldoctor-data-base.appspot.com",
-            messagingSenderId: "364533727761",
-            appId: "1:364533727761:web:36532f50b84493a7bc67b0",
-            measurementId: "G-TF4XEQPN2G"
-        };
-
-        // تهيئة Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
-
-        // دالة لتسجيل التنزيل
-        function recordDownload(appName) {
-            const db = firebase.firestore();
-            const docRef = db.collection('downloads').doc('Downloads');
-
-            db.runTransaction(transaction => {
-                return transaction.get(docRef).then(doc => {
-                    if (!doc.exists) {
-                        throw "Document does not exist!";
-                    }
-
-                    const data = doc.data();
-                    let count = data[appName] || 0;
-                    count++;
-
-                    transaction.update(docRef, { [appName]: count });
-                });
-            }).then(() => {
-                console.log("Transaction successfully committed!");
-            }).catch(error => {
-                console.log("Transaction failed: ", error);
-            });
-        }
-
-        // دالة لتحديث التاريخ والوقت
-        function updateDateTime() {
-            const now = new Date();
-            const gregorianDateElement = document.getElementById("gregorian-date");
-            const hijriDateElement = document.getElementById("hijri-date");
-            const currentTimeElement = document.getElementById("current-time");
-
-            gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
-            hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
-            currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
-        }
-
-        // تحديث التاريخ والوقت كل ثانية
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
-    </script>
-</body>
 </html>
