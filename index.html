@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+    <script src="https://apis.google.com/js/api.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eldoctor Academy</title>
     <link rel="icon" href="eldoctor.ico" type="image/x-icon"> <!-- هنا يتم إضافة الأيقونة -->
     <!-- باقي الأكواد هنا -->
+
+    <!-- Google Analytics Code -->
+    <script>
+        function loadAnalytics() {
+            gapi.load('client:auth2', initAnalytics);
+        }
+
+        function initAnalytics() {
+            gapi.client.init({
+                'apiKey': 'YOUR_API_KEY'
+            }).then(function () {
+                return gapi.client.request({
+                    'path': 'https://www.googleapis.com/analytics/v3/data/ga',
+                    'method': 'GET',
+                    'params': {
+                        'ids': 'ga:YOUR_ANALYTICS_VIEW_ID',
+                        'start-date': '30daysAgo',
+                        'end-date': 'today',
+                        'metrics': 'ga:totalEvents',
+                        'dimensions': 'ga:eventAction',
+                        'filters': 'ga:eventCategory==Downloads'
+                    }
+                });
+            }).then(function (response) {
+                var downloads = response.result.totalsForAllResults['ga:totalEvents'];
+                document.getElementById("downloads").textContent = "عدد التحميلات: " + downloads;
+            }, function (reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }
+
+        loadAnalytics();
+    </script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -146,6 +181,7 @@
         <form action="submit_prayer_times.php" method="post">
             <span id="prayer_times"> الله اكبر </span>
         </form>
+        <span id="downloads"></span> <!-- هنا سيتم عرض عدد التحميلات -->
     </div>
 
 
