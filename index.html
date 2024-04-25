@@ -157,14 +157,16 @@
                         'filters': 'ga:eventCategory==Downloads'
                     }
                 });
-            }).then(function (response) {
-                var downloads = response.result.totalsForAllResults['ga:totalEvents'];
-                document.getElementById("downloads").textContent = "عدد التحميلات: " + downloads;
-            }, function (reason) {
-                console.log('Error: ' + reason.result.error.message);
-            });
-        }
+            .then(function (response) {
+    var downloads = response.result.totalsForAllResults['ga:totalEvents'];
+    document.getElementById("downloads_prayer_times").textContent = "عدد التحميلات: " + downloads; // للرابط الأول
+    document.getElementById("downloads_computer_program").textContent = "عدد التحميلات: " + downloads; // للرابط الثاني
+}, function (reason) {
+    console.log('Error: ' + reason.result.error.message);
+});
 
+        }
+    
         loadAnalytics();
 
         function updateDateTime() {
