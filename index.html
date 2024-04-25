@@ -102,11 +102,11 @@
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
         <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
-        <span id="downloads_prayer_times">عدد التحميلات: </span>
+        
         <br><br>
         <a href="https://drive.usercontent.google.com/download?id=1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z&amp;export=download&amp;authuser=0&amp;confirm=t&amp;uuid=de80ae65-3e0f-4e03-b592-2400b8c89d86&amp;at=APZUnTXKwMa3TOOqrPYbl8DuaYBT:1713987658227">احدث اصدار للبرنامج يعمل على الكمبيوتر</a>
-        <span id="downloads_computer_program">عدد التحميلات: </span>
-        <form action="submit_prayer_times.php" method="post">
+        
+        
             <span id="prayer_times"> الله اكبر </span>
         </form>
     </div>
@@ -115,7 +115,7 @@
     <!-- تحميلات اليوتيوب -->
     <div class="app-update">
         <h2>تحميلات اليوتيوب</h2>
-        <form action="submit_youtube_downloads.php" method="post">
+        
             <span id="youtub"> الله اكبر </span>
         </form>
     </div>
@@ -123,7 +123,7 @@
     <!-- لعبة Hangman -->
     <div class="app-update">
         <h2>لعبة Hangman</h2>
-        <form action="submit_hangman_game.php" method="post">
+        
             <span id="hangman"> الله اكبر </span>
         </form>
     </div>
@@ -135,45 +135,6 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-
-    <script>
-        function loadAnalytics() {
-            gapi.load('client:auth2', initAnalytics);
-        }
-
-        function initAnalytics() {
-            gapi.client.init({
-                'apiKey': 'AIzaSyBhGQv-Z7KGTiSXiHSR5RIFKHxh8anw5wU'
-            }).then(function () {
-                return gapi.client.request({
-                    'path': 'https://www.googleapis.com/analytics/v3/data/ga',
-                    'method': 'GET',
-                    'params': {
-                        'ids': 'ga:G-KB9J9TLY5N', // استبدال XXXXXXXXXX بمعرّف علامة Google الصحيح
-                        'start-date': '30daysAgo',
-                        'end-date': 'today',
-                        'metrics': 'ga:totalEvents',
-                        'dimensions': 'ga:eventAction',
-                        'filters': 'ga:eventCategory==Downloads'
-                    }
-                });
-            }).then(function (response) {
-                var downloads = response.result.totalsForAllResults['ga:totalEvents'];
-                document.getElementById("downloads_prayer_times").textContent = "عدد التحميلات: " + downloads; // للرابط الأول
-                document.getElementById("downloads_computer_program").textContent = "عدد التحميلات: " + downloads; // للرابط الثاني
-            }, function (reason) {
-                console.log('Error: ' + reason.result.error.message);
-            });
-        }
-
-        loadAnalytics();
-
-        function updateDateTime() {
-            const now = new Date();
-            const gregorianDateElement = document.getElementById("gregorian-date");
-            const hijriDateElement = document.getElementById("hijri-date");
-            const currentTimeElement = document.getElementById("current-time");
-
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
