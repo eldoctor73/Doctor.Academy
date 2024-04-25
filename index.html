@@ -130,7 +130,7 @@
             background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
         }
     </style>
-</head>
+</body>
 <body>
     
     <h1>تحديثات التطبيقات</h1>
@@ -176,62 +176,60 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js"></script>
 
 
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-        
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
-          authDomain: "eldoctor-data-base.firebaseapp.com",
-          projectId: "eldoctor-data-base",
-          storageBucket: "eldoctor-data-base.appspot.com",
-          messagingSenderId: "364533727761",
-          appId: "1:364533727761:web:36532f50b84493a7bc67b0",
-          measurementId: "G-TF4XEQPN2G"
-        };
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-        // Initialize Firebase
-        function initializeFirebase() {
-            const script = document.createElement('script');
-            script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
-            script.onload = function() {
-                const analyticsScript = document.createElement('script');
-                analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
-                analyticsScript.onload = function() {
-                    firebase.initializeApp(firebaseConfig);
-                    firebase.analytics();
-                };
-                document.head.appendChild(analyticsScript);
-            };
-            document.head.appendChild(script);
-        }
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
+    authDomain: "eldoctor-data-base.firebaseapp.com",
+    projectId: "eldoctor-data-base",
+    storageBucket: "eldoctor-data-base.appspot.com",
+    messagingSenderId: "364533727761",
+    appId: "1:364533727761:web:36532f50b84493a7bc67b0",
+    measurementId: "G-TF4XEQPN2G"
+    };
 
-        // Call the function to initialize Firebase
-        initializeFirebase();
-        function updateDateTime() {
-            const now = new Date();
-            const gregorianDateElement = document.getElementById("gregorian-date");
-            const hijriDateElement = document.getElementById("hijri-date");
-            const currentTimeElement = document.getElementById("current-time");
+    // Initialize Firebase
+    function initializeFirebase() {
+    const script = document.createElement('script');
+    script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
+    script.onload = function() {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
+    analyticsScript.onload = function() {
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    };
+    document.head.appendChild(analyticsScript);
+    };
+    document.head.appendChild(script);
+    }
 
-            // تحديث التاريخ الميلادي
-            gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
+    // Call the function to initialize Firebase
+    initializeFirebase();
+    function updateDateTime() {
+    const now = new Date();
+    const gregorianDateElement = document.getElementById("gregorian-date");
+    const hijriDateElement = document.getElementById("hijri-date");
+    const currentTimeElement = document.getElementById("current-time");
 
-            // تحديث التاريخ الهجري
-            // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
-            hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
+    // تحديث التاريخ الميلادي
+    gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
 
-            // تحديث الوقت الحالي
-            currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
-        }
+    // تحديث التاريخ الهجري
+    // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
+    hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
 
-        // تحديث الوقت والتاريخ كل ثانية
-        setInterval(updateDateTime, 1000);
+    // تحديث الوقت الحالي
+    currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
+    }
 
-        // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
-        updateDateTime();
-    </script>
+    // تحديث الوقت والتاريخ كل ثانية
+    setInterval(updateDateTime, 1000);
+
+    // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
+    updateDateTime();
 </body>
-</html>
 </html>
