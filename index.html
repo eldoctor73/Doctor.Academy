@@ -191,10 +191,25 @@
           appId: "1:364533727761:web:36532f50b84493a7bc67b0",
           measurementId: "G-TF4XEQPN2G"
         };
-        
+
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        function initializeFirebase() {
+            const script = document.createElement('script');
+            script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
+            script.onload = function() {
+                const analyticsScript = document.createElement('script');
+                analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
+                analyticsScript.onload = function() {
+                    firebase.initializeApp(firebaseConfig);
+                    firebase.analytics();
+                };
+                document.head.appendChild(analyticsScript);
+            };
+            document.head.appendChild(script);
+        }
+
+        // Call the function to initialize Firebase
+        initializeFirebase();
         function updateDateTime() {
             const now = new Date();
             const gregorianDateElement = document.getElementById("gregorian-date");
