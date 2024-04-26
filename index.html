@@ -148,7 +148,7 @@
             
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-        import { getDatabase, ref, update, once } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
+        import { getDatabase, ref, update, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
 
         const firebaseConfig = {
             apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
@@ -165,7 +165,7 @@
 
         function updateDownloadCount() {
             const downloadRef = ref(db, 'downloads/Downloads');
-            once(downloadRef, 'value', snapshot => {
+            onValue(downloadRef, 'value', snapshot => {
                 if (snapshot.exists()) {
                     const currentCount = snapshot.val().count || 0;
                     const newCount = currentCount + 1;
