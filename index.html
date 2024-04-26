@@ -184,7 +184,7 @@
             // استماع للقيمة وتحديث العداد
             onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
-                if (data !== null) {
+                if (data !== null && typeof data === 'object' && 'count' in data) {
                     const newCount = data.count + 1; // زيادة العداد بمقدار واحد
                     // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
                     update(downloadRef, { count: newCount }).then(() => {
@@ -198,6 +198,7 @@
                 }
             });
         }
+
 
 
 
