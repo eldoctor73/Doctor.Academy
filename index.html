@@ -194,13 +194,14 @@
             });
         }
 
-// إضافة حدث "click" إلى الرابط لتعيين قيمة linkClicked إلى true
-document.getElementById('downloadLink1').addEventListener('click', function() {
-    linkClicked = true;
-});
+        document.getElementById('downloadLink1').addEventListener('click', function() {
+            linkClicked = true;
+            updateDownloadCount(); // يتم استدعاء الدالة هنا لتحديث عداد التحميلات عند النقر على الرابط
+        });
 
 
-        updateDownloadCount();
+
+        
 
         function updateDateTime() {
             const now = new Date();
