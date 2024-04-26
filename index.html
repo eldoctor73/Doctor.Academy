@@ -193,10 +193,10 @@
 
         // دالة لحضور قيمة الحقل link2 وعرضها بجوار عدد التحميلات
         function getLinkValue2() {
-            const linkRef = ref(database, 'downloads/Downloads/link2');
+            const linkRef2 = ref(database, 'downloads/Downloads/link2');
             // الحصول على قيمة الحقل link2 باستخدام get()
-            get(linkRef).then((snapshot) => {
-                const newCount = snapshot.val();
+            get(linkRef2).then((snapshot) => {
+                const newCount2 = snapshot.val();
                 // عرض قيمة الحقل link2 بجوار عدد التحميلات
                 document.getElementById('prayer_times_count2').textContent = "عدد التحميلات: " + newCount2;
             }).catch(error => {
