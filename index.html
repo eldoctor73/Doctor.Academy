@@ -152,57 +152,56 @@
   import('https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js').then(({ getFirestore }) => {
     const firestore = getFirestore();
     // يمكنك استخدام firestore هنا
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+      authDomain: "upgrade-page.firebaseapp.com",
+      projectId: "upgrade-page",
+      storageBucket: "upgrade-page.appspot.com",
+      messagingSenderId: "730399930798",
+      appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Create a Firestore database reference
+    const database = firestore;
+
+    // When a download occurs, update the download count in the database
+    function updateDownloadCount() {
+      const downloadRef = database.collection('downloads').doc('Downloads');
+
+      downloadRef.get().then(doc => {
+        if (!doc.exists) {
+          console.log('Document not found!');
+        } else {
+          const currentCount = doc.data().count || 0;
+          // Increment the count by 1
+          const newCount = currentCount + 1;
+
+          // Update the count in the database
+          downloadRef.update({ count: newCount }).then(() => {
+            console.log('Document successfully updated!');
+            // Display the updated value on the page
+            document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+          }).catch(error => {
+            console.error('Error updating document: ', error);
+          });
+        }
+      }).catch(error => {
+        console.error('Error getting document: ', error);
+      });
+    }
+
+    // Update the download count when the link is clicked
+    document.querySelector('.app-update a').addEventListener('click', function() {
+      updateDownloadCount();
+    });
   }).catch(error => {
     console.error('حدث خطأ أثناء تحميل Firestore:', error);
   });
 
-
-            
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
-    authDomain: "upgrade-page.firebaseapp.com",
-    projectId: "upgrade-page",
-    storageBucket: "upgrade-page.appspot.com",
-    messagingSenderId: "730399930798",
-    appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  
-  // Create a Firestore database reference
-  const database = firebase.firestore();
-  // When a download occurs, update the download count in the database
-  function updateDownloadCount() {
-    const downloadRef = database.collection('downloads').doc('Downloads');
-
-    downloadRef.get().then(doc => {
-        if (!doc.exists) {
-            console.log('Document not found!');
-        } else {
-            const currentCount = doc.data().count || 0;
-            // Increment the count by 1
-            const newCount = currentCount + 1;
-            
-            // Update the count in the database
-            downloadRef.update({ count: newCount }).then(() => {
-                console.log('Document successfully updated!');
-                // Display the updated value on the page
-                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-            }).catch(error => {
-                console.error('Error updating document: ', error);
-            });
-        }
-    }).catch(error => {
-        console.error('Error getting document: ', error);
-    });
-}
-
-// Update the download count when the link is clicked
-document.querySelector('.app-update a').addEventListener('click', function() {
-    updateDownloadCount();
-});
 
 
           
