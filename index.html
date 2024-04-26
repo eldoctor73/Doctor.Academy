@@ -148,7 +148,7 @@
             
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-        import { getDatabase, ref, update, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
+        import { getDatabase, ref, update, onValue,set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
 
         const firebaseConfig = {
             apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
@@ -178,6 +178,13 @@
                     });
                 } else {
                     console.log('Document not found or link1 field is undefined!');
+                    // إذا كانت الوثيقة غير موجودة أو حقل link1 غير معرف، قم بإنشاء الوثيقة مع الحقل link1
+                    set(downloadRef, { link1: 1 }).then(() => {
+                        console.log('Document created with link1 field!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
+                    }).catch(error => {
+                        console.error('Error creating document: ', error);
+                    });
                 }
             }, error => {
                 console.error('Error getting document: ', error);
