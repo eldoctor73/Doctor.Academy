@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js"></script>
 
     <title>صفحة التحديثات</title>
     <style>
@@ -142,21 +144,19 @@
         </form>
     </div>
 
-        <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-  import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js';
-  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
-
-  // استيراد Firestore بشكل ديناميكي
-  import('https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js').then(({ getFirestore }) => {
+        <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
-      authDomain: "upgrade-page.firebaseapp.com",
-      projectId: "upgrade-page",
-      storageBucket: "upgrade-page.appspot.com",
-      messagingSenderId: "730399930798",
-      appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
-    };
+       apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+       authDomain: "upgrade-page.firebaseapp.com",
+       projectId: "upgrade-page",
+       storageBucket: "upgrade-page.appspot.com",
+       messagingSenderId: 730399930798",
+       appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
+     };
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+</script>
+
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
