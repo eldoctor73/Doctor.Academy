@@ -175,7 +175,7 @@
         // تحديث عداد التحميلات
         function updateDownloadCount() {
             const downloadRef = ref(db, 'downloads/Downloads');
-            once(downloadRef, 'value').then(snapshot => {
+            get(downloadRef).then(snapshot => {
                 const data = snapshot.val();
                 if (data && data.link1 !== undefined) {
                     let newCount = (data.link1 || 0);
@@ -200,6 +200,7 @@
                 console.error('حدث خطأ أثناء الحصول على الوثيقة: ', error);
             });
         }
+
 
 
 
