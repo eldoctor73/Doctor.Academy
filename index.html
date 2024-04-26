@@ -139,6 +139,23 @@
         </form>
     </div>
     <script>
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+          authDomain: "upgrade-page.firebaseapp.com",
+          projectId: "upgrade-page",
+          storageBucket: "upgrade-page.appspot.com",
+          messagingSenderId: "730399930798",
+          appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
         function updateDateTime() {
             const now = new Date();
             const gregorianDateElement = document.getElementById("gregorian-date");
