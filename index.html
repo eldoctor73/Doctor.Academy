@@ -156,25 +156,28 @@
         };
 
         // Initialize Firebase
-        // Initialize Firebase
-        function initializeFirebase() {
-            const script = document.createElement('script');
-            script.src = 'https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js';
-            script.onload = function() {
-                const analyticsScript = document.createElement('script');
-                analyticsScript.src = 'https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js';
-                analyticsScript.onload = function() {
-                    firebase.initializeApp(firebaseConfig);
-                    firebase.analytics();
-                };
-                document.head.appendChild(analyticsScript);
-            };
-            document.head.appendChild(script);
-            console.log("Script loaded successfully.");
+        // Import the Firebase Firestore library
+        import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+        
+        // Function to fetch prayer times count from Firestore
+        async function fetchPrayerTimesCount() {
+            const db = getFirestore();
+            const prayerTimesDocRef = doc(db, "downloads", "Downloads");
+            const prayerTimesSnapshot = await getDoc(prayerTimesDocRef);
+            const prayerTimesData = prayerTimesSnapshot.data();
+            return prayerTimesData.prayer_times_count || 0; // Return count or 0 if not found
         }
+        
+        // Function to update prayer times count in the HTML
+        async function updatePrayerTimesCount() {
+            const prayerTimesCountElement = document.getElementById("prayer_times_count");
+            const count = await fetchPrayerTimesCount();
+            prayerTimesCountElement.textContent = "عدد التحميلات: " + count;
+        }
+        
+        // Call the function to update prayer times count when the page is loaded for the first time
+        updatePrayerTimesCount();
 
-        // Call the function to initialize Firebase
-        initializeFirebase();
 
         function updateDateTime() {
             const now = new Date();
