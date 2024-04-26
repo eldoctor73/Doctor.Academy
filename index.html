@@ -148,7 +148,7 @@
             
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-        import { getDatabase, ref, update, onValue,set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
+        import { getDatabase, ref, update, onValue, set, once } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
 
         const firebaseConfig = {
             apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
@@ -162,6 +162,9 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
+
+
+
         
         
         // تحديث العداد عند النقر على الرابط فقط
@@ -172,34 +175,31 @@
         // تحديث عداد التحميلات
         function updateDownloadCount() {
             const downloadRef = ref(db, 'downloads/Downloads');
-            onValue(downloadRef, snapshot => {
+            once(downloadRef, 'value').then(snapshot => {
                 const data = snapshot.val();
                 if (data && data.link1 !== undefined) {
                     let newCount = (data.link1 || 0);
                     newCount++; // زيادة العداد بمقدار واحد عند النقر على الرابط
         
                     update(downloadRef, { link1: newCount }).then(() => {
-                        console.log('Document successfully updated!');
+                        console.log('تم تحديث الوثيقة بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
-                        console.error('Error updating document: ', error);
+                        console.error('حدث خطأ أثناء تحديث الوثيقة: ', error);
                     });
                 } else {
-                    console.log('Document not found or link1 field is undefined!');
+                    console.log('الوثيقة غير موجودة أو حقل link1 غير معرف!');
                     set(downloadRef, { link1: 1 }).then(() => {
-                        console.log('Document created with link1 field!');
+                        console.log('تم إنشاء الوثيقة مع حقل link1!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
                     }).catch(error => {
-                        console.error('Error creating document: ', error);
+                        console.error('حدث خطأ أثناء إنشاء الوثيقة: ', error);
                     });
                 }
-            }, error => {
-                console.error('Error getting document: ', error);
+            }).catch(error => {
+                console.error('حدث خطأ أثناء الحصول على الوثيقة: ', error);
             });
         }
-
-
-
 
 
 
