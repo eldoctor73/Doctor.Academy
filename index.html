@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
-    
     <title>صفحة التحديثات</title>
     <style>
         body {
@@ -106,12 +105,10 @@
     <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
-        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
+        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة</a>
         <form action="submit_prayer_times.php" method="post">
             <br><br>
-            <span id="prayer_times_count"> عدد التحميلات: 473 </span>
-            <br><br>
-            <a href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
+            <span id="prayer_times_count"> عدد التحميلات: 0 </span>
             <br><br>
             <span id="prayer_times"> الله اكبر </span>
         </form>
@@ -120,7 +117,7 @@
     <!-- تحميلات اليوتيوب -->
     <div class="app-update">
         <h2>تحميلات اليوتيوب</h2>
-        
+        <a href="">احدث اصدار رابط  تحميل اليوتيوب</a>
         <form action="submit_youtube_downloads.php" method="post">
             <span id="youtub"> الله اكبر </span>
         </form>
@@ -141,68 +138,47 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-    
-        <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-  import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js';
-  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+          authDomain: "upgrade-page.firebaseapp.com",
+          projectId: "upgrade-page",
+          storageBucket: "upgrade-page.appspot.com",
+          messagingSenderId: "730399930798",
+          appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
+        };
 
-  // استيراد Firestore بشكل ديناميكي
-  import('https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js').then(({ getFirestore }) => {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
-      authDomain: "upgrade-page.firebaseapp.com",
-      projectId: "upgrade-page",
-      storageBucket: "upgrade-page.appspot.com",
-      messagingSenderId: "730399930798",
-      appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
-    };
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.firestore();
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+        function updateDownloadCount() {
+            const downloadRef = database.collection('downloads').doc('Downloads');
 
-    // Create a Firestore database reference
-    const database = getFirestore();
+            downloadRef.get().then(doc => {
+                if (!doc.exists) {
+                    console.log('Document not found!');
+                } else {
+                    const currentCount = doc.data().count || 0;
+                    const newCount = currentCount + 1;
 
-    // When a download occurs, update the download count in the database
-    function updateDownloadCount() {
-      const downloadRef = database.collection('downloads').doc('Downloads');
-
-      downloadRef.get().then(doc => {
-        if (!doc.exists) {
-          console.log('Document not found!');
-        } else {
-          const currentCount = doc.data().count || 0;
-          // Increment the count by 1
-          const newCount = currentCount + 1;
-
-          // Update the count in the database
-          downloadRef.update({ count: newCount }).then(() => {
-            console.log('Document successfully updated!');
-            // Display the updated value on the page
-            document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-          }).catch(error => {
-            console.error('Error updating document: ', error);
-          });
+                    downloadRef.update({ count: newCount }).then(() => {
+                        console.log('Document successfully updated!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+                    }).catch(error => {
+                        console.error('Error updating document: ', error);
+                    });
+                }
+            }).catch(error => {
+                console.error('Error getting document: ', error);
+            });
         }
-      }).catch(error => {
-        console.error('Error getting document: ', error);
-      });
-    }
 
-    // Update the download count when the link is clicked
-    document.querySelector('.app-update a').addEventListener('click', function() {
-      updateDownloadCount();
-    });
-  }).catch(error => {
-    console.error('حدث خطأ أثناء تحميل Firestore:', error);
-  });
-
-
-
-
-          
-
+        document.querySelector('.app-update a').addEventListener('click', function() {
+            updateDownloadCount();
+        });
 
         function updateDateTime() {
             const now = new Date();
@@ -210,23 +186,13 @@
             const hijriDateElement = document.getElementById("hijri-date");
             const currentTimeElement = document.getElementById("current-time");
             
-
-            // Update Gregorian Date
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
-
-            // Update Hijri Date
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
-
-            // Update Current Time
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
         }
 
-        // Update date and time every second
         setInterval(updateDateTime, 1000);
-
-        // Update date and time when the page is loaded for the first time
         updateDateTime();
-        
     </script>
 </body>
 </html>
