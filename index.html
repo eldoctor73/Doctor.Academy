@@ -148,7 +148,7 @@
             
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-        import { getDatabase, ref, update, onValue, set, once, child, push, runTransaction } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
+        import { getDatabase, ref, update, onValue, set, child, push, runTransaction } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
 
 
         const firebaseConfig = {
@@ -168,24 +168,37 @@
 
         
         
-        document.addEventListener("DOMContentLoaded", function() {
-        // استدعاء الدالة updateDownloadCount عند تحميل الصفحة
-        updateDownloadCount();
+        // تحديث العداد عند فتح الصفحة
+        window.onload = function() {
+            updateDownloadCount();
+        };
+        
+        // تحديث العداد عند النقر على الرابط فقط
+        document.getElementById('downloadLink1').addEventListener('click', function(event) {
+            event.preventDefault(); // منع السلوك الافتراضي للرابط
+            updateDownloadCount();
         });
         
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
-            // الاستماع لقيمة الحقل مرة واحدة فقط
-            once(downloadRef, (snapshot) => {
+            // استماع للقيمة وتحديث العداد
+            onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
                 if (data !== null) {
-                    // تحديث العدد على الصفحة بقيمة الحقل في قاعدة البيانات
-                    document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + data.count;
+                    const newCount = data.count + 1; // زيادة العداد بمقدار واحد
+                    // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
+                    update(downloadRef, { count: newCount }).then(() => {
+                        console.log('تم تحديث العداد بنجاح!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+                    }).catch(error => {
+                        console.error('حدث خطأ أثناء تحديث العداد: ', error);
+                    });
                 } else {
                     console.log('العداد غير موجود!');
                 }
             });
         }
+
 
 
 
