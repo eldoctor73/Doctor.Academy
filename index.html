@@ -170,6 +170,7 @@
                 document.head.appendChild(analyticsScript);
             };
             document.head.appendChild(script);
+            console.log("Script loaded successfully.");
         }
 
         // Call the function to initialize Firebase
@@ -180,6 +181,7 @@
             const gregorianDateElement = document.getElementById("gregorian-date");
             const hijriDateElement = document.getElementById("hijri-date");
             const currentTimeElement = document.getElementById("current-time");
+            
 
             // Update Gregorian Date
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
@@ -196,6 +198,7 @@
 
         // Update date and time when the page is loaded for the first time
         updateDateTime();
+        
     </script>
 </body>
 </html>
