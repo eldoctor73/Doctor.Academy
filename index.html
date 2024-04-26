@@ -146,53 +146,45 @@
 
 
             
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-    import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase, ref, update, once } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";  
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
-        authDomain: "full-data-33872.firebaseapp.com",
-        databaseURL: "https://full-data-33872-default-rtdb.firebaseio.com",
-        projectId: "full-data-33872",
-        storageBucket: "full-data-33872.appspot.com",
-        messagingSenderId: "723846358285",
-        appId: "1:723846358285:web:d2b9d12ac80fb1cd90fc44"
-    };
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase();
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
 
-    // When a download occurs, update the download count in the database
-    function updateDownloadCount() {
-    const downloadRef = ref(db, 'downloads/Downloads');
-    once(downloadRef, 'value', snapshot => {
-        if (snapshot.exists()) {
-            const currentCount = snapshot.val().count || 0;
-            const newCount = currentCount + 1;
+        function updateDownloadCount() {
+            const downloadRef = ref(db, 'downloads/Downloads');
+            once(downloadRef, 'value', snapshot => {
+                if (snapshot.exists()) {
+                    const currentCount = snapshot.val().count || 0;
+                    const newCount = currentCount + 1;
 
-            update(downloadRef, { count: newCount }).then(() => {
-                console.log('Document successfully updated!');
-                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-            }).catch(error => {
-                console.error('Error updating document: ', error);
+                    update(downloadRef, { count: newCount }).then(() => {
+                        console.log('Document successfully updated!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+                    }).catch(error => {
+                        console.error('Error updating document: ', error);
+                    });
+                } else {
+                    console.log('Document not found!');
+                }
+            }, error => {
+                console.error('Error getting document: ', error);
             });
-        } else {
-            console.log('Document not found!');
         }
-    }, error => {
-        console.error('Error getting document: ', error);
-    });
-}
 
         updateDownloadCount();
-
-
-  
-
 
         function updateDateTime() {
             const now = new Date();
@@ -200,23 +192,13 @@
             const hijriDateElement = document.getElementById("hijri-date");
             const currentTimeElement = document.getElementById("current-time");
 
-
-            // Update Gregorian Date
             gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
-
-            // Update Hijri Date
             hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
-
-            // Update Current Time
             currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
         }
 
-        // Update date and time every second
         setInterval(updateDateTime, 1000);
-
-        // Update date and time when the page is loaded for the first time
         updateDateTime();
-
     </script>
 </body>
 </html>
