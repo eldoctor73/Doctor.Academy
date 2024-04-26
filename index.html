@@ -140,6 +140,9 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+
     <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -153,15 +156,16 @@
         };
 
         // Initialize Firebase
+        // Initialize Firebase
         function initializeFirebase() {
             const script = document.createElement('script');
-            script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
+            script.src = 'https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js';
             script.onload = function() {
                 const analyticsScript = document.createElement('script');
-                analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
+                analyticsScript.src = 'https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js';
                 analyticsScript.onload = function() {
-                firebase.initializeApp(firebaseConfig);
-                firebase.analytics();
+                    firebase.initializeApp(firebaseConfig);
+                    firebase.analytics();
                 };
                 document.head.appendChild(analyticsScript);
             };
