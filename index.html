@@ -171,22 +171,21 @@
         window.onload = function() {
             updateDownloadCount();
         };
-        
-        // تحديث العداد عند النقر على الرابط فقط
+
         document.getElementById('downloadLink1').addEventListener('click', function(event) {
             event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount();
         });
-        
+
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
             // استماع للقيمة وتحديث العداد
             onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
-                if (data !== null && typeof data === 'object' && !isNaN(data)) {
+                if (!isNaN(data)) {
                     let newCount = parseInt(data, 10);
                     newCount++; // زيادة العداد بمقدار واحد
-                    // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
+                    // تحديث العداد بالقيمة الجديدة
                     update(downloadRef, newCount).then(() => {
                         console.log('تم تحديث العداد بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
