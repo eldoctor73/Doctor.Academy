@@ -159,6 +159,40 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  // إنشاء اتصال بقاعدة البيانات
+const database = firebase.firestore();
+
+// عند عملية التنزيل، قم بتحديث قيمة عدد التحميلات في قاعدة البيانات
+function updateDownloadCount() {
+    const downloadRef = database.collection('downloads').doc('Downloads');
+
+    downloadRef.get().then(doc => {
+        if (!doc.exists) {
+            console.log('Document not found!');
+        } else {
+            const currentCount = doc.data().count || 0;
+            // Increment the count by 1
+            const newCount = currentCount + 1;
+            
+            // Update the count in the database
+            downloadRef.update({ count: newCount }).then(() => {
+                console.log('Document successfully updated!');
+                // إعادة عرض القيمة المحدثة في الصفحة
+                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+            }).catch(error => {
+                console.error('Error updating document: ', error);
+            });
+        }
+    }).catch(error => {
+        console.error('Error getting document: ', error);
+    });
+}
+
+// تحديث عدد التحميلات عندما يتم النقر على الرابط
+document.querySelector('.app-update a').addEventListener('click', function() {
+    updateDownloadCount();
+});
+          
 
 
         function updateDateTime() {
