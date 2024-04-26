@@ -107,7 +107,7 @@
     <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
-        <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">تحميل مواقيت الصلاة</a>
+        <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
         <form action="submit_prayer_times.php" method="post">
             <br><br>
             <span id="prayer_times_count"> عدد التحميلات: 0 </span>
@@ -163,6 +163,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
         console.error('connecting with data base ', error);
+        
         document.getElementById('downloadLink1').addEventListener('click', function() {
             const downloadRef = ref(db, 'downloads/Downloads');
             // جلب قيمة التحميلات الحالية من قاعدة البيانات
