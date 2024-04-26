@@ -168,34 +168,28 @@
 
     // When a download occurs, update the download count in the database
     function updateDownloadCount() {
-        const downloadRef = ref(db, 'downloads/Downloads');
-        downloadRef.get().then(snapshot => {
-            if (!snapshot.exists()) {
-                console.log('Document not found!');
-            } else {
-                const currentCount = snapshot.val().count || 0;
-                // Increment the count by 1
-                const newCount = currentCount + 1;
+    const downloadRef = ref(db, 'downloads/Downloads');
+    once(downloadRef, 'value', snapshot => {
+        if (snapshot.exists()) {
+            const currentCount = snapshot.val().count || 0;
+            const newCount = currentCount + 1;
 
-                // Update the count in the database
-                update(downloadRef, { count: newCount }).then(() => {
-                    console.log('Document successfully updated!');
-                    // Display the updated value on the page
-                    document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-                }).catch(error => {
-                    console.error('Error updating document: ', error);
-                });
-            }
-        }).catch(error => {
-            console.error('Error getting document: ', error);
-        });
-    }
-
-    // Update the download count when the link is clicked
-    document.querySelector('.app-update a').addEventListener('click', function() {
-        updateDownloadCount();
+            update(downloadRef, { count: newCount }).then(() => {
+                console.log('Document successfully updated!');
+                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+            }).catch(error => {
+                console.error('Error updating document: ', error);
+            });
+        } else {
+            console.log('Document not found!');
+        }
+    }, error => {
+        console.error('Error getting document: ', error);
     });
-</script>
+}
+
+        updateDownloadCount();
+
 
   
 
