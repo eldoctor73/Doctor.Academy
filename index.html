@@ -182,11 +182,11 @@
             // استماع للقيمة وتحديث العداد
             onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
-                if (!isNaN(data)) {
+                if (data !== null && typeof data === 'number' && !isNaN(data)) {
                     let newCount = parseInt(data, 10);
                     newCount++; // زيادة العداد بمقدار واحد
-                    // تحديث العداد بالقيمة الجديدة
-                    update(downloadRef, newCount).then(() => {
+                    // تحديث العداد باستخدام دالة set() لاستبدال القيمة بالكامل
+                    set(downloadRef, newCount).then(() => {
                         console.log('تم تحديث العداد بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
@@ -197,6 +197,7 @@
                 }
             });
         }
+
 
 
 
