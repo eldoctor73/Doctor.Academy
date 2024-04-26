@@ -158,10 +158,10 @@
           appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
         };
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        // const db = getFirestore(app);
         // Function to fetch prayer times count from Firestore
         async function fetchPrayerTimesCount() {
-          const prayerTimesDocRef = db.collection("downloads").doc("Downloads");
+          const prayerTimesDocRef = app.collection("downloads").doc("Downloads");
           const prayerTimesSnapshot = await prayerTimesDocRef.get();
           const prayerTimesData = prayerTimesSnapshot.data();
           return prayerTimesData.prayer_times_count || 0; // Return count or 0 if not found
