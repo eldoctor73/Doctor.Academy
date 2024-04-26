@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
     <title>صفحة التحديثات</title>
     <style>
         body {
@@ -138,22 +142,17 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
-    <script>
-        // Your web app's Firebase configuration
+    <script type="module">
         const firebaseConfig = {
-          apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
-          authDomain: "upgrade-page.firebaseapp.com",
-          projectId: "upgrade-page",
-          storageBucket: "upgrade-page.appspot.com",
-          messagingSenderId: "730399930798",
-          appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
+            apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+            authDomain: "upgrade-page.firebaseapp.com",
+            projectId: "upgrade-page",
+            storageBucket: "upgrade-page.appspot.com",
+            messagingSenderId: "730399930798",
+            appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
         };
-
-        // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.firestore();
-
+        const db = firebase.firestore();
         function updateDownloadCount() {
             const downloadRef = database.collection('downloads').doc('Downloads');
 
