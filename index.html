@@ -169,7 +169,7 @@
         const db = getDatabase();
         // When a download occurs, update the download count in the database
         function updateDownloadCount() {
-          const downloadRef = database.collection('downloads').doc('Downloads');
+          const downloadRef = db.collection('downloads').doc('Downloads');
           downloadRef.get().then(doc => {
             if (!doc.exists) {
               console.log('Document not found!');
