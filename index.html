@@ -198,9 +198,9 @@
             get(linkRef).then((snapshot) => {
                 const newCount = snapshot.val();
                 // عرض قيمة الحقل link1 بجوار عدد التحميلات
-                document.getElementById('prayer_times_count_DT').textContent = "عدد التحميلات: " + newCount;
+                document.getElementById('prayer_times_count_DT').textContent = "عدد التحميلات: " + newCount2;
             }).catch(error => {
-                console.error('حدث خطأ أثناء جلب قيمة الحقل link1: ', error);
+                console.error('حدث خطأ أثناء جلب قيمة الحقل link2: ', error);
             });
         }
         getLinkValue2()
