@@ -155,14 +155,10 @@
      };
      // Initialize Firebase
      firebase.initializeApp(firebaseConfig);
-</script>
 
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
 
-    // Create a Firestore database reference
-    const database = getFirestore();
+    const db = firebase.firestore();
 
     // When a download occurs, update the download count in the database
     function updateDownloadCount() {
