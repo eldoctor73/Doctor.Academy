@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
-    <<script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js'
-
-    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js'
-
-    // Add Firebase products that you want to use
-    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js'
-    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js'
-  </script>
     <title>صفحة التحديثات</title>
     <style>
         body {
@@ -149,35 +139,6 @@
         </form>
     </div>
     <script>
-       const firebaseConfig = {
-          apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
-          authDomain: "upgrade-page.firebaseapp.com",
-          projectId: "upgrade-page",
-          storageBucket: "upgrade-page.appspot.com",
-          messagingSenderId: "730399930798",
-          appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
-        };
-        const app = initializeApp(firebaseConfig);
-        // const db = getFirestore(app);
-        // Function to fetch prayer times count from Firestore
-        async function fetchPrayerTimesCount() {
-          const prayerTimesDocRef = app.collection("downloads").doc("Downloads");
-          const prayerTimesSnapshot = await prayerTimesDocRef.get();
-          const prayerTimesData = prayerTimesSnapshot.data();
-          return prayerTimesData.prayer_times_count || 0; // Return count or 0 if not found
-        }
-        
-        // Function to update prayer times count in the HTML
-        async function updatePrayerTimesCount() {
-          const prayerTimesCountElement = document.getElementById("prayer_times_count");
-          const count = await fetchPrayerTimesCount();
-          prayerTimesCountElement.textContent = "عدد التحميلات: " + count;
-        }
-        
-        // Call the function to update prayer times count when the page is loaded for the first time
-        updatePrayerTimesCount();
-
-
         function updateDateTime() {
             const now = new Date();
             const gregorianDateElement = document.getElementById("gregorian-date");
