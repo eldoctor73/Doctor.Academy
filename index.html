@@ -183,11 +183,11 @@
             // استماع للقيمة وتحديث العداد
             onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
-                if (data !== null && typeof data === 'object' && 'count' in data) {
-                    let newCount = parseInt(data.count, 10); // تحويل القيمة إلى رقم صحيح
+                if (data !== null && typeof data === 'object' && !isNaN(data)) {
+                    let newCount = parseInt(data, 10);
                     newCount++; // زيادة العداد بمقدار واحد
                     // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
-                    update(downloadRef, { count: newCount }).then(() => {
+                    update(downloadRef, newCount).then(() => {
                         console.log('تم تحديث العداد بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
@@ -198,6 +198,7 @@
                 }
             });
         }
+
 
 
 
