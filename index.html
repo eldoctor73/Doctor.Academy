@@ -174,30 +174,23 @@
         
         // تحديث عداد التحميلات
         function updateDownloadCount() {
-            const downloadRef = ref(db, 'downloads/Downloads');
-            get(downloadRef).then(snapshot => {
+            const downloadRef = ref(database, 'downloads/Downloads/link1');
+            // استماع للقيمة مرة واحدة وتحديث العداد
+            onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
-                if (data && data.link1 !== undefined) {
-                    let newCount = (data.link1 || 0);
-                    newCount++; // زيادة العداد بمقدار واحد عند النقر على الرابط
-        
-                    update(downloadRef, { link1: newCount }).then(() => {
-                        console.log('تم تحديث الوثيقة بنجاح!');
+                if (data !== null) {
+                    let newCount = data + 1; // زيادة العداد بمقدار واحد عند النقر على الرابط
+                    update(downloadRef, newCount).then(() => {
+                        console.log('تم تحديث العداد بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
-                        console.error('حدث خطأ أثناء تحديث الوثيقة: ', error);
+                        console.error('حدث خطأ أثناء تحديث العداد: ', error);
                     });
                 } else {
-                    console.log('الوثيقة غير موجودة أو حقل link1 غير معرف!');
-                    set(downloadRef, { link1: 1 }).then(() => {
-                        console.log('تم إنشاء الوثيقة مع حقل link1!');
-                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
-                    }).catch(error => {
-                        console.error('حدث خطأ أثناء إنشاء الوثيقة: ', error);
-                    });
+                    console.log('العداد غير موجود!');
                 }
-            }).catch(error => {
-                console.error('حدث خطأ أثناء الحصول على الوثيقة: ', error);
+            }, {
+                onlyOnce: true // تأكد من أن الاستماع يتم مرة واحدة فقط
             });
         }
 
