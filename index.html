@@ -172,7 +172,6 @@
             updateDownloadCount();
         });
         
-        // تحديث عداد التحميلات
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
             // استماع للقيمة مرة واحدة وتحديث العداد
@@ -180,7 +179,8 @@
                 const data = snapshot.val();
                 if (data !== null) {
                     let newCount = data + 1; // زيادة العداد بمقدار واحد عند النقر على الرابط
-                    update(downloadRef, newCount).then(() => {
+                    // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
+                    update(downloadRef, { count: newCount }).then(() => {
                         console.log('تم تحديث العداد بنجاح!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
