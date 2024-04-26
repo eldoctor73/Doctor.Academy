@@ -166,7 +166,7 @@
         document.getElementById('downloadLink1').addEventListener('click', function() {
             const downloadRef = ref(db, 'downloads/Downloads');
             // جلب قيمة التحميلات الحالية من قاعدة البيانات
-            get(downloadRef).then(snapshot => {
+            onValue(downloadRef, snapshot => {
                 const data = snapshot.val();
                 let newCount = (data && data.link1 !== undefined) ? data.link1 + 1 : 1; // زيادة العدد بمقدار واحد
                 // تحديث عدد التحميلات في قاعدة البيانات
@@ -176,10 +176,11 @@
                 }).catch(error => {
                     console.error('Error updating document: ', error);
                 });
-            }).catch(error => {
+            }, error => {
                 console.error('Error getting document: ', error);
             });
         });
+
 
 
 
