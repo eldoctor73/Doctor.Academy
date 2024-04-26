@@ -194,10 +194,10 @@
         // دالة لحضور قيمة الحقل link2 وعرضها بجوار عدد التحميلات
         function getLinkValue2() {
             const linkRef = ref(database, 'downloads/Downloads/link2');
-            // الحصول على قيمة الحقل link1 باستخدام get()
+            // الحصول على قيمة الحقل link2 باستخدام get()
             get(linkRef).then((snapshot) => {
                 const newCount = snapshot.val();
-                // عرض قيمة الحقل link1 بجوار عدد التحميلات
+                // عرض قيمة الحقل link2 بجوار عدد التحميلات
                 document.getElementById('prayer_times_count2').textContent = "عدد التحميلات: " + newCount2;
             }).catch(error => {
                 console.error('حدث خطأ أثناء جلب قيمة الحقل link2: ', error);
@@ -215,12 +215,11 @@
             updateDownloadCount();
         }
         function handleDownloadClick2(event) {
-            // event.preventDefault(); // منع السلوك الافتراضي للرابط
+            event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount2();
         }
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
-        
             get(downloadRef).then((snapshot) => {
                 const data = snapshot.val();
                 if (data !== null && typeof data === 'number' && !isNaN(data)) {
