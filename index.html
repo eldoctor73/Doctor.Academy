@@ -178,18 +178,12 @@
                     });
                 } else {
                     console.log('Document not found or link1 field is undefined!');
-                    // إذا كانت الوثيقة غير موجودة أو حقل link1 غير معرف، قم بإنشاء الوثيقة مع الحقل link1
-                    set(downloadRef, { link1: 1 }).then(() => {
-                        console.log('Document created with link1 field!');
-                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
-                    }).catch(error => {
-                        console.error('Error creating document: ', error);
-                    });
                 }
             }, error => {
                 console.error('Error getting document: ', error);
             });
         }
+
 
         updateDownloadCount();
 
