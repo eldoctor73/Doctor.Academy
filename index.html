@@ -190,10 +190,12 @@
         initializePage();
 
         
-        document.getElementById('downloadLink1').addEventListener('click', function(event) {
+        document.getElementById('downloadLink1').addEventListener('click', handleDownloadClick);
+
+        function handleDownloadClick(event) {
             event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount();
-        });
+        }
         
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
@@ -222,6 +224,7 @@
                 }
             });
         }
+
 
         
 
