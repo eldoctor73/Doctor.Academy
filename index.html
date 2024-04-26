@@ -107,7 +107,7 @@
     <!-- مواقيت الصلاة -->
     <div class="app-update">
         <h2>مواقيت الصلاة</h2>
-        <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
+        <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">تحميل مواقيت الصلاة</a>
         <form action="submit_prayer_times.php" method="post">
             <br><br>
             <span id="prayer_times_count"> عدد التحميلات: 473 </span>
@@ -163,6 +163,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
 
+        // تعريف متغير linkClicked وتعيين قيمته إلى false
+        let linkClicked = false;
+        
+        // دالة لتحديث عداد التحميلات
         function updateDownloadCount() {
             const downloadRef = ref(db, 'downloads/Downloads');
             onValue(downloadRef, snapshot => {
@@ -178,11 +182,22 @@
                     });
                 } else {
                     console.log('Document not found or link1 field is undefined!');
+                    set(downloadRef, { link1: 1 }).then(() => {
+                        console.log('Document created with link1 field!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
+                    }).catch(error => {
+                        console.error('Error creating document: ', error);
+                    });
                 }
             }, error => {
                 console.error('Error getting document: ', error);
             });
         }
+
+// إضافة حدث "click" إلى الرابط لتعيين قيمة linkClicked إلى true
+document.getElementById('downloadLink1').addEventListener('click', function() {
+    linkClicked = true;
+});
 
 
         updateDownloadCount();
