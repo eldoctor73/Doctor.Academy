@@ -164,23 +164,41 @@
         const db = getDatabase();
         console.error('connecting with data base ', error);
         
+        // تحديث العداد عند النقر على الرابط فقط
         document.getElementById('downloadLink1').addEventListener('click', function() {
+            updateDownloadCount();
+        });
+        
+        // تحديث عداد التحميلات
+        function updateDownloadCount() {
             const downloadRef = ref(db, 'downloads/Downloads');
-            // جلب قيمة التحميلات الحالية من قاعدة البيانات
             onValue(downloadRef, snapshot => {
                 const data = snapshot.val();
-                let newCount = (data && data.link1 !== undefined) ? data.link1 + 1 : 1; // زيادة العدد بمقدار واحد
-                // تحديث عدد التحميلات في قاعدة البيانات
-                update(downloadRef, { link1: newCount }).then(() => {
-                    console.log('Document successfully updated!');
-                    document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-                }).catch(error => {
-                    console.error('Error updating document: ', error);
-                });
+                if (data && data.link1 !== undefined) {
+                    let newCount = (data.link1 || 0);
+                    newCount++; // زيادة العداد بمقدار واحد عند النقر على الرابط
+        
+                    update(downloadRef, { link1: newCount }).then(() => {
+                        console.log('Document successfully updated!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+                    }).catch(error => {
+                        console.error('Error updating document: ', error);
+                    });
+                } else {
+                    console.log('Document not found or link1 field is undefined!');
+                    set(downloadRef, { link1: 1 }).then(() => {
+                        console.log('Document created with link1 field!');
+                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
+                    }).catch(error => {
+                        console.error('Error creating document: ', error);
+                    });
+                }
             }, error => {
                 console.error('Error getting document: ', error);
             });
-        });
+        }
+
+
 
 
 
