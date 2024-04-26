@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
-    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js"></script>
 
     <title>صفحة التحديثات</title>
     <style>
@@ -150,11 +150,8 @@
           messagingSenderId: "730399930798",
           appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
         };
-        
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        
         // Function to fetch prayer times count from Firestore
         async function fetchPrayerTimesCount() {
           const prayerTimesDocRef = db.collection("downloads").doc("Downloads");
