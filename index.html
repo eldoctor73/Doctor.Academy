@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="eldoctor.ico">
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
-
-    <!-- تضمين مكتبة Firebase -->
-
     <title>صفحة التحديثات</title>
     <style>
         body {
@@ -143,39 +138,33 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
-
     <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
-            authDomain: "eldoctor-data-base.firebaseapp.com",
-            projectId: "eldoctor-data-base",
-            storageBucket: "eldoctor-data-base.appspot.com",
-            messagingSenderId: "364533727761",
-            appId: "1:364533727761:web:36532f50b84493a7bc67b0",
-            measurementId: "G-TF4XEQPN2G"
+       const firebaseConfig = {
+          apiKey: "AIzaSyDl0Ijw-h9CoQ_ADsFXv7Ps_KaDdL8CknY",
+          authDomain: "upgrade-page.firebaseapp.com",
+          projectId: "upgrade-page",
+          storageBucket: "upgrade-page.appspot.com",
+          messagingSenderId: "730399930798",
+          appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
         };
-
+        
         // Initialize Firebase
-        // Import the Firebase Firestore library
-        import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
         
         // Function to fetch prayer times count from Firestore
         async function fetchPrayerTimesCount() {
-            const db = getFirestore();
-            const prayerTimesDocRef = doc(db, "downloads", "Downloads");
-            const prayerTimesSnapshot = await getDoc(prayerTimesDocRef);
-            const prayerTimesData = prayerTimesSnapshot.data();
-            return prayerTimesData.prayer_times_count || 0; // Return count or 0 if not found
+          const prayerTimesDocRef = db.collection("downloads").doc("Downloads");
+          const prayerTimesSnapshot = await prayerTimesDocRef.get();
+          const prayerTimesData = prayerTimesSnapshot.data();
+          return prayerTimesData.prayer_times_count || 0; // Return count or 0 if not found
         }
         
         // Function to update prayer times count in the HTML
         async function updatePrayerTimesCount() {
-            const prayerTimesCountElement = document.getElementById("prayer_times_count");
-            const count = await fetchPrayerTimesCount();
-            prayerTimesCountElement.textContent = "عدد التحميلات: " + count;
+          const prayerTimesCountElement = document.getElementById("prayer_times_count");
+          const count = await fetchPrayerTimesCount();
+          prayerTimesCountElement.textContent = "عدد التحميلات: " + count;
         }
         
         // Call the function to update prayer times count when the page is loaded for the first time
