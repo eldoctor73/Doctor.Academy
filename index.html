@@ -163,44 +163,22 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
 
-        // تعريف متغير linkClicked وتعيين قيمته إلى false
-        let linkClicked = false;
-        
-        // دالة لتحديث عداد التحميلات
-        function updateDownloadCount() {
+        document.getElementById('downloadLink1').addEventListener('click', function() {
             const downloadRef = ref(db, 'downloads/Downloads');
-            onValue(downloadRef, snapshot => {
+            // جلب قيمة التحميلات الحالية من قاعدة البيانات
+            get(downloadRef).then(snapshot => {
                 const data = snapshot.val();
-                if (data && data.link1 !== undefined) {
-                    let newCount = (data.link1 || 0);
-                    if (linkClicked) {
-                        newCount++;
-                        linkClicked = false; // إعادة تعيين قيمة المتغير بعد التحديث
-                    }
-        
-                    update(downloadRef, { link1: newCount }).then(() => {
-                        console.log('Document successfully updated!');
-                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-                    }).catch(error => {
-                        console.error('Error updating document: ', error);
-                    });
-                } else {
-                    console.log('Document not found or link1 field is undefined!');
-                    set(downloadRef, { link1: 1 }).then(() => {
-                        console.log('Document created with link1 field!');
-                        document.getElementById('prayer_times_count').textContent = "عدد التحميلات: 1";
-                    }).catch(error => {
-                        console.error('Error creating document: ', error);
-                    });
-                }
-            }, error => {
+                let newCount = (data && data.link1 !== undefined) ? data.link1 + 1 : 1; // زيادة العدد بمقدار واحد
+                // تحديث عدد التحميلات في قاعدة البيانات
+                update(downloadRef, { link1: newCount }).then(() => {
+                    console.log('Document successfully updated!');
+                    document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+                }).catch(error => {
+                    console.error('Error updating document: ', error);
+                });
+            }).catch(error => {
                 console.error('Error getting document: ', error);
             });
-        }
-        updateDownloadCount()
-        document.getElementById('downloadLink1').addEventListener('click', function() {
-            linkClicked = true;
-            
         });
 
 
