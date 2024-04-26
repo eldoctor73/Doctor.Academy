@@ -168,7 +168,6 @@
 
         
         
-        // تحديث العداد عند فتح الصفحة
         window.onload = function() {
             updateDownloadCount();
         };
@@ -185,7 +184,8 @@
             onValue(downloadRef, (snapshot) => {
                 const data = snapshot.val();
                 if (data !== null && typeof data === 'object' && 'count' in data) {
-                    const newCount = data.count + 1; // زيادة العداد بمقدار واحد
+                    let newCount = parseInt(data.count, 10); // تحويل القيمة إلى رقم صحيح
+                    newCount++; // زيادة العداد بمقدار واحد
                     // تحديث العداد باستخدام كائن يحتوي على العدد الجديد
                     update(downloadRef, { count: newCount }).then(() => {
                         console.log('تم تحديث العداد بنجاح!');
@@ -198,6 +198,7 @@
                 }
             });
         }
+
 
 
 
