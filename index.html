@@ -240,7 +240,7 @@
             get(downloadRef).then((snapshot) => {
                 const data = snapshot.val();
                 if (data !== null && typeof data === 'number' && !isNaN(data)) {
-                    newCount = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
+                    newCount2 = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
                     return set(downloadRef, newCount2); // تحديث القيمة مباشرة
                 } else {
                     console.log('العداد 2 غير موجود!');
