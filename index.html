@@ -172,7 +172,11 @@
             onValue(downloadRef, snapshot => {
                 const data = snapshot.val();
                 if (data && data.link1 !== undefined) {
-                    const newCount = (data.link1 || 0) + 1;
+                    let newCount = (data.link1 || 0);
+                    if (linkClicked) {
+                        newCount++;
+                        linkClicked = false; // إعادة تعيين قيمة المتغير بعد التحديث
+                    }
         
                     update(downloadRef, { link1: newCount }).then(() => {
                         console.log('Document successfully updated!');
@@ -193,10 +197,10 @@
                 console.error('Error getting document: ', error);
             });
         }
-
+        updateDownloadCount()
         document.getElementById('downloadLink1').addEventListener('click', function() {
             linkClicked = true;
-            updateDownloadCount(); // يتم استدعاء الدالة هنا لتحديث عداد التحميلات عند النقر على الرابط
+            
         });
 
 
