@@ -206,11 +206,17 @@
         getLinkValue()
 
         let newCount = 0; // متغير global لتخزين العداد الجديد
-        document.getElementById('downloadLink1').addEventListener('click', handleDownloadClick);
+        let newCount2 = 0; // متغير global لتخزين العداد الجديد
         
+        document.getElementById('downloadLink1').addEventListener('click', handleDownloadClick);
+        document.getElementById('downloadLink2').addEventListener('click', handleDownloadClick2);
         function handleDownloadClick(event) {
             // event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount();
+        }
+        function handleDownloadClick2(event) {
+            // event.preventDefault(); // منع السلوك الافتراضي للرابط
+            updateDownloadCount2();
         }
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
@@ -226,6 +232,23 @@
             }).then(() => {
                 console.log('تم تحديث العداد بنجاح!');
                 document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
+            }).catch(error => {
+                console.error('حدث خطأ أثناء تحديث العداد: ', error);
+            });
+        }
+        function updateDownloadCount2() {
+            const downloadRef = ref(database, 'downloads/Downloads/link2');
+            get(downloadRef).then((snapshot) => {
+                const data = snapshot.val();
+                if (data !== null && typeof data === 'number' && !isNaN(data)) {
+                    newCount = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
+                    return set(downloadRef, newCount2); // تحديث القيمة مباشرة
+                } else {
+                    console.log('العداد غير موجود!');
+                }
+            }).then(() => {
+                console.log('تم تحديث العداد بنجاح!');
+                document.getElementById('prayer_times_count_DT').textContent = "عدد التحميلات: " + newCount2;
             }).catch(error => {
                 console.error('حدث خطأ أثناء تحديث العداد: ', error);
             });
