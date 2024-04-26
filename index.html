@@ -167,18 +167,17 @@
             const downloadRef = ref(db, 'downloads/Downloads');
             onValue(downloadRef, snapshot => {
                 const data = snapshot.val();
-                if (data) {
-                    const currentCount = data.count || 0;
-                    const newCount = currentCount + 1;
+                if (data && data.link1 !== undefined) {
+                    const newCount = (data.link1 || 0) + 1;
         
-                    update(downloadRef, { count: newCount }).then(() => {
+                    update(downloadRef, { link1: newCount }).then(() => {
                         console.log('Document successfully updated!');
                         document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
                     }).catch(error => {
                         console.error('Error updating document: ', error);
                     });
                 } else {
-                    console.log('Document not found!');
+                    console.log('Document not found or link1 field is undefined!');
                 }
             }, error => {
                 console.error('Error getting document: ', error);
