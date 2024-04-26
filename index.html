@@ -36,53 +36,11 @@
             font-size: 18px;
             margin-top: 10px;
         }
-    </style>
-</head>
-<body>
-    <div class="header-box">
-        <img src="eldoctor.png" alt="أكاديمية" class="logo-image">
-        
-        <div class="date-time-info" id="date-time-info">
-            <span id="gregorian-date"></span><br>
-            <span id="hijri-date"></span><br>
-            <span id="current-time"></span>
-        </div>
-    </div>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff; /* لون خلفية منقوش */
-        }
         h1 {
             color: #333;
             margin-top: 20px;
             font-size: 48px;
             font-weight: bold;
-        }
-        .header-box {
-            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
-            padding: 20px;
-            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
-            position: relative; /* لتمكين التحكم في الموقع */
-        }
-        .header-text {
-            color: Black; /* لون النص */
-            font-size: 40px; /* حجم النص */
-            font-weight: bold; /* وزن النص */
-            display: inline; /* إزالة التائه للنص */
-            position: absolute; /* لتمكين التحكم في الموقع */
-            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
-            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
-            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
-
-        }
-        .logo-image {
-            max-width: 200px; /* تحديد الحد الأقصى للعرض */
-            margin-bottom: 10px; /* تباعد بين الصورة والعنوان */
         }
         .app-update {
             border-radius: 10px;
@@ -130,9 +88,17 @@
             background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
         }
     </style>
-</body>
+</head>
 <body>
-    
+    <div class="header-box">
+        <img src="eldoctor.png" alt="أكاديمية" class="logo-image">
+        <div class="date-time-info" id="date-time-info">
+            <span id="gregorian-date"></span><br>
+            <span id="hijri-date"></span><br>
+            <span id="current-time"></span>
+        </div>
+    </div>
+
     <h1>تحديثات التطبيقات</h1>
 
     <!-- مواقيت الصلاة -->
@@ -141,7 +107,7 @@
         <a href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة</a>
         <form action="submit_prayer_times.php" method="post">
             <br><br>
-        <span id="prayer_times_count"> عدد التحميلات: 0 </span>
+            <span id="prayer_times_count"> عدد التحميلات: 0 </span>
             <br><br>
             <span id="prayer_times"> الله اكبر </span>
         </form>
@@ -171,65 +137,62 @@
             <span id="program5"> الله اكبر </span>
         </form>
     </div>
-<script>
-        <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js"></script>
 
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
+            authDomain: "eldoctor-data-base.firebaseapp.com",
+            projectId: "eldoctor-data-base",
+            storageBucket: "eldoctor-data-base.appspot.com",
+            messagingSenderId: "364533727761",
+            appId: "1:364533727761:web:36532f50b84493a7bc67b0",
+            measurementId: "G-TF4XEQPN2G"
+        };
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-    apiKey: "AIzaSyAA2A-WsOPO1SO0OLqPNACykQhWthSMc7g",
-    authDomain: "eldoctor-data-base.firebaseapp.com",
-    projectId: "eldoctor-data-base",
-    storageBucket: "eldoctor-data-base.appspot.com",
-    messagingSenderId: "364533727761",
-    appId: "1:364533727761:web:36532f50b84493a7bc67b0",
-    measurementId: "G-TF4XEQPN2G"
-    };
+        // Initialize Firebase
+        function initializeFirebase() {
+            const script = document.createElement('script');
+            script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
+            script.onload = function() {
+                const analyticsScript = document.createElement('script');
+                analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
+                analyticsScript.onload = function() {
+                    firebase.initializeApp(firebaseConfig);
+                    firebase.analytics();
+                };
+                document.head.appendChild(analyticsScript);
+            };
+            document.head.appendChild(script);
+        }
 
-    // Initialize Firebase
-    function initializeFirebase() {
-    const script = document.createElement('script');
-    script.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js';
-    script.onload = function() {
-    const analyticsScript = document.createElement('script');
-    analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
-    analyticsScript.onload = function() {
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    };
-    document.head.appendChild(analyticsScript);
-    };
-    document.head.appendChild(script);
-    }
+        // Call the function to initialize Firebase
+        initializeFirebase();
 
-    // Call the function to initialize Firebase
-    initializeFirebase();
-    function updateDateTime() {
-    const now = new Date();
-    const gregorianDateElement = document.getElementById("gregorian-date");
-    const hijriDateElement = document.getElementById("hijri-date");
-    const currentTimeElement = document.getElementById("current-time");
+        function updateDateTime() {
+            const now = new Date();
+            const gregorianDateElement = document.getElementById("gregorian-date");
+            const hijriDateElement = document.getElementById("hijri-date");
+            const currentTimeElement = document.getElementById("current-time");
 
-    // تحديث التاريخ الميلادي
-    gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
+            // Update Gregorian Date
+            gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
 
-    // تحديث التاريخ الهجري
-    // يمكنك استبدال هذا بطريقة للتحويل من التاريخ الميلادي إلى التاريخ الهجري
-    hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
+            // Update Hijri Date
+            hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
 
-    // تحديث الوقت الحالي
-    currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
-    }
+            // Update Current Time
+            currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
+        }
 
-    // تحديث الوقت والتاريخ كل ثانية
-    setInterval(updateDateTime, 1000);
+        // Update date and time every second
+        setInterval(updateDateTime, 1000);
 
-    // تحديث الوقت والتاريخ عند تحميل الصفحة للمرة الأولى
-    updateDateTime();
+        // Update date and time when the page is loaded for the first time
+        updateDateTime();
+    </script>
 </body>
 </html>
