@@ -157,7 +157,7 @@
           messagingSenderId: "730399930798",
           appId: "1:730399930798:web:a1d0b39edf255f8cb6b03f"
         };
-        firebase.initializeApp(firebaseConfig);
+        const app = initializeApp(firebaseConfig);
         const db = firebase.firestore();
         // Function to fetch prayer times count from Firestore
         async function fetchPrayerTimesCount() {
