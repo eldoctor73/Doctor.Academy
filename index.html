@@ -168,10 +168,27 @@
 
         
         
-        window.onload = function() {
-            // تحديث العداد عند تحميل الصفحة
-            updateDownloadCount();
-        };
+        // دالة لتحميل الصفحة واستدعاء getLinkValue
+        function initializePage() {
+            getLinkValue();
+        }
+        
+        // دالة لحضور قيمة الحقل link1 وعرضها بجوار عدد التحميلات
+        function getLinkValue() {
+            const linkRef = ref(database, 'downloads/Downloads/link1');
+            // الحصول على قيمة الحقل link1 باستخدام get()
+            get(linkRef).then((snapshot) => {
+                const linkValue = snapshot.val();
+                // عرض قيمة الحقل link1 بجوار عدد التحميلات
+                document.getElementById('link_value').textContent = "قيمة الحقل link1: " + linkValue;
+            }).catch(error => {
+                console.error('حدث خطأ أثناء جلب قيمة الحقل link1: ', error);
+            });
+        }
+        
+        // استدعاء الدالة initializePage عند تحميل الصفحة
+        initializePage();
+
         
         document.getElementById('downloadLink1').addEventListener('click', function(event) {
             event.preventDefault(); // منع السلوك الافتراضي للرابط
