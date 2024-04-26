@@ -162,7 +162,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase();
-
+        console.error('connecting with data base ', error);
         document.getElementById('downloadLink1').addEventListener('click', function() {
             const downloadRef = ref(db, 'downloads/Downloads');
             // جلب قيمة التحميلات الحالية من قاعدة البيانات
