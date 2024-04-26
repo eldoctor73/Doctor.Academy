@@ -163,8 +163,8 @@
                 const analyticsScript = document.createElement('script');
                 analyticsScript.src = 'https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics-compat.js';
                 analyticsScript.onload = function() {
-                    firebase.initializeApp(firebaseConfig);
-                    firebase.analytics();
+                firebase.initializeApp(firebaseConfig);
+                firebase.analytics();
                 };
                 document.head.appendChild(analyticsScript);
             };
