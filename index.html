@@ -1,219 +1,202 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/ico" href="Doctorr.ico">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/ico" href="Doctorr.ico">
 
 
-    <title>Eldoctor.Academy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff; /* لون خلفية منقوش */
-        }
-        .header-box {
-            background-color: #00FFFF; /* لون خلفية بوكس العنوان */
-            padding: 20px;
-            margin-bottom: 20px; /* هام للفصل بين العنوان والمحتوى */
-            display: flex; /* تحويل العناصر إلى عرض مرن */
-            flex-direction: column; /* ترتيب العناصر باتجاه العمود */
-            align-items: center; /* محاذاة العناصر بالوسط عموديًا */
-            position: relative; /* لتمكين التحكم في الموقع */
-        }
-        .header-text {
-            color: Black; /* لون النص */
-            font-size: 60px; /* حجم النص */
-            font-weight: bold; /* وزن النص */
-            display: inline; /* إزالة التائه للنص */
-            position: absolute; /* لتمكين التحكم في الموقع */
-            top: 50%; /* تحديد الموقع إلى الوسط رأسيًا */
-            transform: translateY(-50%); /* تحريك النص إلى الوسط بنسبة طول نصفه */
-            left: calc(100% + 20px); /* تحديد الموقع إلى اليمين بنسبة بعد الصورة */
-        }
-        .logo-image {
-            max-width: 400px; /* تحديد الحد الأقصى للعرض */
-            max-height: 150px; /* تحديد الحد الأقصى للارتفاع */
-            margin-bottom: 15px; /* تباعد بين الصورة والعنوان */
-        }
-        .date-time-info {
-            font-size: 22px;
-            margin-top: 10px;
-        }
-        h1 {
-            color: #333;
-            margin-top: 20px;
-            font-size: 48px;
-            font-weight: bold;
-        }
-        .app-update {
-            display: none;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 600px;
-        }
-        .app-update h2 {
-            color: #333;
-        }
-        .update-link {
-            margin-top: 20px;
-        }
-        input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        a {
-            color: purple; /* تغيير لون الروابط إلى اللون الأزرق */
-        }
+        <title>Eldoctor.Academy</title>
+        <style>
+            .header-box {
+                background-image: linear-gradient(to bottom, #00FFFF, #FFFFFF);
+<!--                background-color: #00FFFF; /* لون خلفية بوكس العنوان */-->
+                padding: 10px; /* تقليل الهوامش الداخلية */
+                margin-bottom: 200px; /* هام للفصل بين العنوان والمحتوى */
+                display: flex; /* تحويل العناصر إلى عرض مرن */
+                flex-direction: column; /* ترتيب العناصر باتجاه العمود */
+                align-items: center; /* محاذاة العناصر بالوسط عموديًا */
+                position: relative; /* لتمكين التحكم في الموقع */
+<!--                max-height: 800px; /* تقليل الارتفاع */-->
+                max-height: 100vh; /* تعيين الارتفاع ليمتلئ بشكل كامل بارتفاع الشاشة */
+                margin: 0 auto; /* جعل البوكس في وسط الصفحة */
+            }
 
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 40px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        /* ألوان البوكسات */
-        .app-update:nth-child(odd) {
-            background-color: #b3e5fc; /* لون البوكسات الفردية (أزرق فاتح) */
-        }
-        .app-update:nth-child(even) {
-            display: none;
-            background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
-        }
-        /* أنماط للزرارين */
-        #loginButton, #signupButton {
-            background-color: #008CBA; /* لون خلفية الزر */
-            color: white; /* لون النص */
-            border: none; /* إزالة الحدود */
-            padding: 10px 20px; /* مساحة الحشو داخل الزر */
-            text-align: center; /* محاذاة النص في الوسط */
-            margin: 10px; /* تباعد بين الأزرار */
-            border-radius: 5px; /* إضافة زوايا مستديرة */
-            cursor: pointer; /* تغيير المؤشر إلى شكل يد تشير إلى النقر */
-            font-size: 20px; /* تحديد حجم الخط */
-        }
+            .logo-image {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+                width: 100vw; /* تعيين العرض بنسبة 100٪ من عرض الشاشة */
+                height: 250px; /* تحديد الارتفاع بقيمة ثابتة بالبكسل */
+                max-width: 600px; /* تحديد الحد الأقصى للعرض */
+                max-height: 150px; /* تحديد الحد الأقصى للارتفاع */
+                margin-bottom: 15px; /* تباعد بين الصورة والعنوان */
+            }
+            .logo-image:hover {
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ظل للعنصر */
+            }
+            h1 {
+                color: #333;
+                margin-top: 20px;
+                font-size: 48px;
+                font-weight: bold;
+            }
+            .app-update {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                display: none;
+                border-radius: 20px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                margin: 20px auto;
+                padding: 20px;
+                max-width: 60%;
+                text-align: center;
+                background-color: #f5f5f5;
+                border: 2px solid #ddd;
+            }
+            .app-update:hover {
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ظل للعنصر */
+            }
 
 
-        /* تنسيق عند تحويل المؤشر إلى الزر */
-        #loginButton:hover, #signupButton:hover {
-            background-color: #005F6B; /* تغيير لون الخلفية عند تحويل المؤشر إليه */
-        }
-        /* تنسيق حقل اسم المستخدم */
-        input[type="text"], input[type="password"] {
-            width: 60%; /* العرض */
-            padding: 10px; /* الحشو */
-            margin: 10px; /* التباعد */
-            border: 1px solid #ccc; /* الحدود */
-            border-radius: 5px; /* زوايا مستديرة */
-            font-size: 20px; /* حجم الخط */
-        }
-         #welcomeMessage {
-        display: none; /* يكون مخفياً بشكل افتراضي */
-        background-color: #f0f0f0; /* لون خلفية العنصر */
-        color: blue; /* لون النص */
-        font-family: Arial, sans-serif; /* نوع الخط */
-        font-size: 22px; /* حجم الخط */
-        padding: 10px; /* تباعد داخلي للعنصر */
-        border: 1px solid #ccc; /* حدود العنصر */
-        border-radius: 5px; /* زوايا مستديرة */
-        margin-top: 20px; /* تباعد بين العنصر والعناصر الأخرى */
-        text-align: center; /* محاذاة النص في الوسط */
-        }
+            a {
+                color: blue; /* تغيير لون الروابط إلى اللون الأزرق */
+            }
 
-    </style>
-</head>
-<body>
+
+            /* ألوان البوكسات */
+            .app-update:nth-child(odd) {
+                background-color: #b3e5fc; /* لون البوكسات الفردية (أزرق فاتح) */
+            }
+            .app-update:nth-child(even) {
+                display: none;
+                background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
+            }
+            /* أنماط للزرارين */
+            #loginButton, #signupButton {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+                background-color: #008CBA; /* لون خلفية الزر */
+                width: 200; /* العرض */
+                color: white; /* لون النص */
+                border: none; /* إزالة الحدود */
+                padding: 10px 20px; /* مساحة الحشو داخل الزر */
+                text-align: center; /* محاذاة النص في الوسط */
+                margin: 10px; /* تباعد بين الأزرار */
+                border-radius: 5px; /* إضافة زوايا مستديرة */
+                cursor: pointer; /* تغيير المؤشر إلى شكل يد تشير إلى النقر */
+                font-size: 20px; /* تحديد حجم الخط */
+            }
+            /* تنسيق عند تحويل المؤشر إلى الزر */
+            #loginButton:hover, #signupButton:hover {
+                background-color: #005F6B; /* تغيير لون الخلفية عند تحويل المؤشر إليه */
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ظل للعنصر */
+            }
+            /* تنسيق حقل اسم المستخدم */
+            input[type="text"], input[type="password"] {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+                width: 35%; /* العرض */
+                padding: 10px; /* الحشو */
+                margin: 10px; /* التباعد */
+                border: 1px solid #ccc; /* الحدود */
+                border-radius: 5px; /* زوايا مستديرة */
+                font-size: 20px; /* حجم الخط */
+            }
+            input[type="text"]:hover, input[type="password"]:hover {
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ظل للعنصر */
+            }
+            #welcomeMessage {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+
+                display: none; /* يكون مخفياً بشكل افتراضي */
+                background-color: #4CAF50; /* لون خلفية العنصر */
+                color: white; /* لون النص */
+                font-family: Arial, sans-serif; /* نوع الخط */
+                font-size: 24px; /* حجم الخط */
+                padding: 20px; /* تباعد داخلي للعنصر */
+                border: 2px solid #4CAF50; /* حدود العنصر */
+                border-radius: 10px; /* زوايا مستديرة */
+                margin-top: 20px; /* تباعد بين العنصر والعناصر الأخرى */
+                text-align: center; /* محاذاة النص في الوسط */
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* ظل للعنصر */
+                transition: 0.3s; /* تأثير تغيير الحجم */
+            }
+
+            #welcomeMessage:hover {
+                transform: scale(1.05); /* تكبير العنصر عند التحويم بالماوس */
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* تغيير ظل العنصر */
+            }
+
+            #loginMessage {
+                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+                margin-top: 5px; /* تباعد بين العنصر والعناصر الأخرى */
+                font-size: 22px;
+                font-family: Arial, sans-serif;
+                color: blue;
+                font-weight: bold;
+                font-style: italic;
+                text-align: center;
+                line-height: 0.5;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+            #loginMessage:hover {
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ظل للعنصر */
+            }
+
+
+        </style>
+    </head>
+    <body>
         <div class="header-box">
-            <div class="date-time-info" id="date-time-info">
-                <span id="gregorian-date"></span><br>
-                <span id="hijri-date"></span><br>
-                <span id="current-time"></span>
-            </div>
-
-
-            <img src="Doctor.png" alt="أكاديمية" class="logo-image">
+            <span id="gregorian-date"></span>
+            <span id="hijri-date"></span>
+            <span id="current-time"></span><br>
+            <img src="Doctor.png" alt="أكاديمية" class="logo-image"><br>
             <p id="welcomeMessage" style="display: none;"></p>
-
-            <p id="loginMessage" style="color: blue;">يرجى تسجيل الدخول لرؤية التطبيقات.</p>
-
+            <p id="loginMessage" >يرجى تسجيل الدخول لرؤية التطبيقات.</p>
             <!-- حقل اسم المستخدم -->
             <input type="text" id="username" name="username" placeholder=" ...اكتب ايميلك هنا ">
-
             <!-- حقل كلمة المرور -->
             <input type="password" id="password" name="password" placeholder=" ...كلمة المرور">
-
             <!-- زر تسجيل الدخول -->
             <button id="loginButton">تسجيل الدخول</button>
-<!--            &lt;!&ndash; زر إنشاء مستخدم جديد &ndash;&gt;-->
-<!--            <button id="signupButton">إنشاء مستخدم جديد</button>-->
             <!-- زر إنشاء مستخدم جديد -->
             <a href="register.html" id="signupButton">إنشاء مستخدم جديد</a>
+            <h1>تحديثات التطبيقات</h1>
+            <div class="app-update">
+                <h2>مواقيت الصلاة</h2>
+                <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
+                <br><br>
+                <span id="prayer_times_count"> عدد التحميلات: 0 </span>
+                <br><br>
+                <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
+                <br><br>
+                <span id="prayer_times_count2"> عدد التحميلات: 0 </span>
+                <br><br>
+                <span id="prayer_times"> الله اكبر </span>
 
-
-
-    </div>
-
-    <h1>تحديثات التطبيقات</h1>
-
-    <!-- مواقيت الصلاة -->
-    <div class="app-update">
-        <h2>مواقيت الصلاة</h2>
-        <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
-        <form action="submit_prayer_times.php" method="post">
-            <br><br>
-            <span id="prayer_times_count"> عدد التحميلات: 0 </span>
-            <br><br>
-            <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
-            <br><br>
-            <span id="prayer_times_count2"> عدد التحميلات: 0 </span>
-            <br><br>
-            <span id="prayer_times"> الله اكبر </span>
-        </form>
-    </div>
-
-    <!-- تحميلات اليوتيوب -->
-    <div class="app-update">
-        <h2>تحميلات اليوتيوب</h2>
-
-        <form action="submit_youtube_downloads.php" method="post">
-            <span id="youtub"> الله اكبر </span>
-        </form>
-    </div>
-
-    <!-- لعبة Hangman -->
-    <div class="app-update">
-        <h2>لعبة Hangman</h2>
-        <form action="submit_hangman_game.php" method="post">
-            <span id="hangman"> الله اكبر </span>
-        </form>
-    </div>
-
-    <!-- البرنامج الخامس -->
-    <div class="app-update">
-        <h2>البرنامج الخامس</h2>
-        <form action="submit_fifth_app.php" method="post">
-            <span id="program5"> الله اكبر </span>
-        </form>
-    </div>
-
-
-
+            </div>
+            <!-- تحميلات اليوتيوب -->
+            <div class="app-update">
+                <h2>تحميلات اليوتيوب</h2>
+                <span id="youtub"> الله اكبر </span>
+            </div>
+            <!-- لعبة Hangman -->
+            <div class="app-update">
+                <h2>لعبة Hangman</h2>
+                <span id="hangman"> الله اكبر </span>
+            </div>
+            <!-- البرنامج الخامس -->
+            <div class="app-update">
+                <h2>البرنامج الخامس</h2>
+                <span id="program5"> الله اكبر </span>
+            </div>
+        </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
