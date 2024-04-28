@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="eldoctor.ico">
+    <title>Eldoctor.Academy</title>
+    <style>
+
+        /* تحديد نموذج الإدخال للنصوص والبريد الإلكتروني وكلمات المرور وأرقام الهاتف */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%; /* يجعل العناصر تمتد لتأخذ عرضاً كاملاً */
+            margin: 10px 0; /* تحديد التباعد بين العناصر العمودياً بمقدار 10 بكسل من الأعلى والأسفل */
+            padding: 10px; /* تحديد المسافة الداخلية للعناصر */
+            border: 1px solid #ccc; /* تحديد الحدود ونوعها */
+            border-radius: 5px; /* تحديد زوايا مستديرة للحدود */
+            box-sizing: border-box; /* تحديد حجم الصندوق ليشمل الحدود والتباعدات داخل العنصر */
+        }
+
+
+<!--        /* تنسيق لزر الإرسال */-->
+
+        /* تحديد اللون والحجم للعناصر التي تطلب الإدخال */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus {
+            outline: none; /* إزالة الحدود المحيطة بالعنصر عند التركيز */
+            border-color: #005F6B; /* لون الحدود عند التركيز */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* ظل للتمييز عند التركيز */
+        }
+
+
+        /* تنسيق للعناصر النصية داخل النموذج */
+        h2 {
+            color: #333; /* لون العنوان */
+            margin-bottom: 20px; /* هامش أسفل العنوان */
+        }
+
+        /* تنسيق عام للصفحة */
+        body {
+            font-family: Arial, sans-serif; /* نوع الخط */
+            text-align: center; /* محاذاة النص إلى الوسط */
+            background-color: #f9f9f9; /* لون خلفية الصفحة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* يجعل العناصر تمتلئ بالشاشة بغض النظر عن عدد العناصر */
+        }
+        form {
+            max-width: 400px;
+            width: 100%; /* يجعل النموذج يمتد على كامل العرض */
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+         #signupButton {
+            display: inline-block;
+            background-color: #008CBA;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #signupButton:hover {
+            background-color: #005F6B;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="/submit_new_user" method="post">
+        <h2>إنشاء مستخدم جديد</h2>
+        <input type="text" id="firstName" name="firstName" placeholder="الاسم الأول" required autocomplete="given-name">
+        <input type="text" id="lastName" name="lastName" placeholder="اسم العائلة" required autocomplete="family-name">
+        <input type="text" id="nickname" name="nickname" placeholder="اسم الشهرة" required autocomplete="nickname">
+        <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required autocomplete="tel">
+        <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required autocomplete="email">
+        <input type="password" id="password" name="password" placeholder="كلمة المرور" required autocomplete="new-password">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="تأكيد كلمة المرور" required autocomplete="new-password">
+        <a href="Updates.html" class="back-link">رجوع</a>
+<!--        <a href="Updates.html" id="signupButton">إنشاء المستخدم</a>-->
+        <a  id="signupButton">إنشاء المستخدم</a>
+
+
+    </form>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase, ref, update, onValue, set, child, push, runTransaction,get } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
+            authDomain: "full-data-33872.firebaseapp.com",
+            databaseURL: "https://full-data-33872-default-rtdb.firebaseio.com",
+            projectId: "full-data-33872",
+            storageBucket: "full-data-33872.appspot.com",
+            messagingSenderId: "723846358285",
+            appId: "1:723846358285:web:d2b9d12ac80fb1cd90fc44"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database  = getDatabase();
+        console.log("تم الاتصال بالداتا بيز");
+
+
+
+
+
+        function createUser() {
+            // Get input values
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const nickname = document.getElementById("nickname").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Check if all fields are filled
+            if (firstName && lastName && phone && email && password && confirmPassword) {
+                // Create user object
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    nickname: nickname,
+                    phone: phone,
+                    email: email,
+                    password: password
+                };
+
+                // Use the first and last name as the key
+                const userKey = `${firstName} ${lastName}`;
+
+                // Add user data to the database
+                const usersRef = ref(database, 'users');
+                const userRef = child(usersRef, userKey);
+
+                set(userRef, userData).then(() => {
+                    console.log("Data added successfully");
+                    alert('تم إنشاء المستخدم بنجاح!');
+                }).catch((error) => {
+                    console.error('Error adding user: ', error);
+                    alert('حدث خطأ أثناء إنشاء المستخدم. يرجى المحاولة مرة أخرى.');
+                });
+            } else {
+                alert('الرجاء ملء جميع الحقول.');
+            }
+        }
+
+
+
+
+
+         // استدعاء الدالة عند النقر على الزر
+        document.getElementById("signupButton").addEventListener("click", createUser);
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
