@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/ico" href="eldoctor.ico">
+    <link rel="icon" type="image/ico" href="Doctor.ico">
     <title>Eldoctor.Academy</title>
     <style>
 
@@ -12,6 +12,8 @@
         input[type="email"],
         input[type="password"],
         input[type="tel"] {
+            background-image: linear-gradient(to bottom, #00FFFF, #FFFFFF);
+            transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
             width: 100%; /* يجعل العناصر تمتد لتأخذ عرضاً كاملاً */
             margin: 10px 0; /* تحديد التباعد بين العناصر العمودياً بمقدار 10 بكسل من الأعلى والأسفل */
             padding: 10px; /* تحديد المسافة الداخلية للعناصر */
@@ -19,9 +21,16 @@
             border-radius: 5px; /* تحديد زوايا مستديرة للحدود */
             box-sizing: border-box; /* تحديد حجم الصندوق ليشمل الحدود والتباعدات داخل العنصر */
         }
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="password"]:hover,
+        input[type="tel"]:hover{
+                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
+        }
 
 
-<!--        /* تنسيق لزر الإرسال */-->
+
 
         /* تحديد اللون والحجم للعناصر التي تطلب الإدخال */
         input[type="text"]:focus,
@@ -61,6 +70,7 @@
         }
 
          #signupButton {
+            transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
             display: inline-block;
             background-color: #008CBA;
             color: white;
@@ -71,8 +81,23 @@
         }
 
         #signupButton:hover {
+            transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
             background-color: #005F6B;
         }
+        .back-link {
+            /* إضافة قواعد CSS هنا لتحديد مظهر الرابط */
+            transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
+            color: blue; /* تغيير لون النص إلى اللون الأزرق */
+            text-decoration: none; /* إزالة تأثير التأطير الافتراضي للرابط */
+            font-weight: bold; /* جعل النص عريضًا */
+            /* يمكنك استخدام المزيد من الخصائص حسب احتياجاتك */
+        }
+        .back-link:hover {
+            transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
+        }
+
 
     </style>
 </head>
