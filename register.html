@@ -169,6 +169,11 @@
                 alert('يرجى إدخال عنوان بريد إلكتروني صالح.');
                 return; // Stop further execution
             };
+            // التحقق من تطابق كلمتي المرور
+            if (password !== confirmPassword) {
+                alert('كلمة المرور وتأكيد كلمة المرور غير متطابقين.');
+                return; // التوقف عن التنفيذ
+            }
 
 
             // Check if all fields are filled
@@ -204,6 +209,42 @@
         }
         // استدعاء الدالة عند النقر على الزر
         document.getElementById("signupButton").addEventListener("click", createUser);
+
+
+
+
+        const emailField = document.getElementById("email");
+
+        // إضافة مستمع حدث لحقل البريد الإلكتروني
+        emailField.addEventListener("input", checkEmailAvailability);
+
+        function checkEmailAvailability() {
+            const email = emailField.value;
+
+            if (email.trim() !== "") {
+                const usersRef = ref(database, 'users');
+
+                // قراءة جميع بيانات المستخدمين
+                get(usersRef).then((snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                        const userData = childSnapshot.val();
+                        if (userData.email === email) {
+                            // البريد الإلكتروني موجود في قاعدة البيانات
+                            alert('عذرًا، هذا البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.');
+                            return;
+                        }
+                    });
+
+                    // البريد الإلكتروني متاح
+                    console.log('البريد الإلكتروني متاح.');
+                }).catch((error) => {
+                    console.error('خطأ في قراءة بيانات المستخدمين: ', error);
+                    // التعامل مع الخطأ
+                });
+            }
+        }
+
+
 
 
 
