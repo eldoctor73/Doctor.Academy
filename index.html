@@ -199,6 +199,7 @@
         </div>
 
     <script type="module">
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase, ref, update, onValue, set, child, push, runTransaction,get } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
@@ -243,29 +244,44 @@
         function handleLogin() {
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            validateLogin(username, password).then(valid => {
-                if (valid) {
-                    alert("تم تسجيل الدخول بنجاح!");
-                    // إخفاء حقلي اسم المستخدم وكلمة المرور وزر تسجيل الدخول
-                    // داخل دالة handleLogin بعد نجاح تسجيل الدخول
-                    document.getElementById("loginMessage").style.display = "none";
-                    document.getElementById("username").style.display = "none";
-                    document.getElementById("password").style.display = "none";
-                    document.getElementById("loginButton").style.display = "none";
-                    document.getElementById("signupButton").style.display = "none";
-                    const appUpdates = document.querySelectorAll(".app-update");
-                    appUpdates.forEach(update => {
-                        update.style.display = "block";
+
+            signInWithEmailAndPassword(getAuth(), username, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    if (!user.emailVerified) {
+                        alert("يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول.");
+                        return;
+                    }
+
+                    validateLogin(username, password).then(valid => {
+                        if (valid) {
+                            alert("تم تسجيل الدخول بنجاح!");
+                            // إخفاء حقلي اسم المستخدم وكلمة المرور وزر تسجيل الدخول
+                            document.getElementById("username").style.display = "none";
+                            document.getElementById("password").style.display = "none";
+                            document.getElementById("loginButton").style.display = "none";
+
+                            // إظهار العناصر المناسبة بعد تسجيل الدخول بنجاح
+                            const appUpdates = document.querySelectorAll(".app-update");
+                            appUpdates.forEach(update => {
+                                update.style.display = "block";
+                            });
+                            displayWelcomeMessage(username);
+
+                            // هنا يمكنك توجيه المستخدم إلى الصفحة المطلوبة
+                        } else {
+                            alert('فشل تسجيل الدخول. يرجى التحقق من البيانات.');
+                        }
+                    }).catch(error => {
+                        console.error("حدث خطأ أثناء التحقق من بيانات تسجيل الدخول:", error);
                     });
-                    displayWelcomeMessage(username);
-                    // هنا يمكنك توجيه المستخدم إلى الصفحة المطلوبة
-                } else {
-                    alert('فشل تسجيل الدخول.');
-                }
-            }).catch(error => {
-                console.error("حدث خطأ أثناء التحقق من بيانات تسجيل الدخول:", error);
-            });
+                })
+                .catch((error) => {
+                    alert('فشل تسجيل الدخول. تأكد من تطابق البريد الإلكتروني وكلمة المرور.');
+                    console.error("حدث خطأ أثناء محاولة تسجيل الدخول:", error);
+                });
         }
+
 
         // إضافة استماع للنقر على زر تسجيل الدخول وتعيين الدالة handleLogin كوظيفة تنفيذ عند النقر
         document.getElementById("loginButton").addEventListener("click", handleLogin);
