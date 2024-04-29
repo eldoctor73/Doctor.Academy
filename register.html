@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="Doctorr.ico">
+
     <title>Eldoctor.Academy</title>
     <style>
 
@@ -133,7 +134,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase, ref, update, onValue, set, child, push, runTransaction,get } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"; // استيراد Firebase Authentication
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+        import { sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
@@ -153,6 +156,10 @@
 
 
 
+
+
+
+
          // دالة لإنشاء المستخدم
         async function createUser() {
             // Get input values
@@ -164,6 +171,7 @@
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
 
+             // نمط تعبير النمط النظامي للتحقق من صحة البريد الإلكتروني
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!emailPattern.test(email)) {
@@ -200,21 +208,33 @@
                     password: password
                 }
 
-                // Use the first and last name as the key
+                // Use the nickname as the key
                 const userKey = `${nickname}`;
 
                 // Add user data to the database
                 const usersRef = ref(database, 'users');
                 const userRef = child(usersRef, userKey);
 
+                const auth = getAuth(); // الحصول على كائن auth
+
                 try {
+                    // إنشاء المستخدم في Firebase Authentication
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+
+                    // إرسال رسالة التحقق بالبريد الإلكتروني
+                    await sendEmailVerification(user);
+
+                    // حفظ بيانات المستخدم في قاعدة البيانات
                     await set(userRef, userData);
-                    console.log("Data added successfully");
-                    alert('تم إنشاء المستخدم بنجاح اضغط رجوع للتوجه الى صفحه تسجيل الدخول!');
+                    console.log("تمت إضافة البيانات بنجاح");
+
+                    alert('تم إنشاء المستخدم بنجاح. انتقل إلى صفحة تسجيل الدخول!');
                 } catch (error) {
-                    console.error('Error adding user: ', error);
+                    console.error('خطأ في إضافة المستخدم: ', error);
                     alert('حدث خطأ أثناء إنشاء المستخدم. يرجى المحاولة مرة أخرى.');
                 }
+
             } else {
                 alert('الرجاء ملء جميع الحقول.');
             }
@@ -258,6 +278,9 @@
 
         // إضافة مستمع لحدث النقر على زر التسجيل
         document.getElementById("signupButton").addEventListener("click", createUser);
+
+
+
 
 
 
