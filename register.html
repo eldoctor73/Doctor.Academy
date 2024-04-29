@@ -153,7 +153,8 @@
 
 
 
-        function createUser() {
+         // دالة لإنشاء المستخدم
+        async function createUser() {
             // Get input values
             const firstName = document.getElementById("firstName").value;
             const lastName = document.getElementById("lastName").value;
@@ -174,17 +175,18 @@
                 alert('كلمة المرور وتأكيد كلمة المرور غير متطابقين.');
                 return; // التوقف عن التنفيذ
             }
+
             // التحقق من توافر اسم الشهرة
-            const nicknameAvailable = checkNicknameAvailability(nickname);
+            const nicknameAvailable = await checkNicknameAvailability(nickname);
             if (!nicknameAvailable) {
                 return; // التوقف عن التنفيذ إذا كان اسم الشهرة غير متاح
             }
-             // التحقق من توافر البريد الإلكتروني
-            const emailAvailable = checkEmailAvailability(email);
+
+            // التحقق من توافر البريد الإلكتروني
+            const emailAvailable = await checkEmailAvailability(email);
             if (!emailAvailable) {
                 return; // التوقف عن التنفيذ إذا كان البريد الإلكتروني غير متاح
             }
-
 
             // Check if all fields are filled
             if (firstName && lastName && phone && email && password && confirmPassword) {
@@ -196,8 +198,7 @@
                     phone: phone,
                     email: email,
                     password: password
-                    }
-
+                }
 
                 // Use the first and last name as the key
                 const userKey = `${nickname}`;
@@ -206,87 +207,57 @@
                 const usersRef = ref(database, 'users');
                 const userRef = child(usersRef, userKey);
 
-                set(userRef, userData).then(() => {
+                try {
+                    await set(userRef, userData);
                     console.log("Data added successfully");
-                    alert('  ....تم إنشاء المستخدم بنجاح اضغط رجوع للذهاب الى صفحه تسجيل الدخول!');
-                }).catch((error) => {
+                    alert('تم إنشاء المستخدم بنجاح!');
+                } catch (error) {
                     console.error('Error adding user: ', error);
                     alert('حدث خطأ أثناء إنشاء المستخدم. يرجى المحاولة مرة أخرى.');
-                });
+                }
             } else {
                 alert('الرجاء ملء جميع الحقول.');
             }
         }
-        // استدعاء الدالة عند النقر على الزر
-        document.getElementById("signupButton").addEventListener("click", createUser);
 
-
-
-
-        const emailField = document.getElementById("email");
-
-        // إضافة مستمع حدث لحقل البريد الإلكتروني
-        emailField.addEventListener("input", checkEmailAvailability);
-
-        function checkEmailAvailability() {
-            const email = emailField.value;
-
-            if (email.trim() !== "") {
-                const usersRef = ref(database, 'users');
-
-                // قراءة جميع بيانات المستخدمين
-                get(usersRef).then((snapshot) => {
-                    snapshot.forEach((childSnapshot) => {
-                        const userData = childSnapshot.val();
-                        if (userData.email === email) {
-                            // البريد الإلكتروني موجود في قاعدة البيانات
-                            alert('عذرًا، هذا البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.');
-                            return;
-                        }
-                    });
-
-                    // البريد الإلكتروني متاح
-                    console.log('البريد الإلكتروني متاح.');
-                }).catch((error) => {
-                    console.error('خطأ في قراءة بيانات المستخدمين: ', error);
-                    // التعامل مع الخطأ
-                });
-            }
-        }
-        const nicknameField = document.getElementById("nickname");
-
-        // إضافة مستمع حدث "input" لحقل اسم الشهرة
-        nicknameField.addEventListener("input", checkNicknameAvailability);
-
-        // دالة التحقق من توافر اسم الشهرة
-        function checkNicknameAvailability() {
-            const nickname = nicknameField.value.trim();
-
-            if (nickname === "") {
-                return; // إذا كانت القيمة فارغة، لا تقم بالتحقق
-            }
-
+         // دالة للتحقق من توافر البريد الإلكتروني
+        async function checkEmailAvailability(email) {
             const usersRef = ref(database, 'users');
-            get(usersRef).then((snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    const userData = childSnapshot.val();
-                    if (userData.nickname === nickname) {
-                        // اسم الشهرة موجود في قاعدة البيانات
-                        alert('عذرًا، اسم الشهرة مستخدم بالفعل. يرجى استخدام اسم شهرة آخر.');
-                        return;
-                    }
-                });
+            const snapshot = await get(usersRef);
+            let emailAvailable = true;
 
-                // اسم الشهرة متاح
-                console.log('اسم الشهرة متاح.');
-            }).catch((error) => {
-                console.error('خطأ في قراءة بيانات المستخدمين: ', error);
-                // التعامل مع الخطأ
+            snapshot.forEach((childSnapshot) => {
+                const userData = childSnapshot.val();
+                if (userData.email === email) {
+                    // البريد الإلكتروني موجود في قاعدة البيانات
+                    alert('عذرًا، هذا البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.');
+                    emailAvailable = false;
+                }
             });
+
+            return emailAvailable;
         }
 
+         // دالة للتحقق من توافر اسم الشهرة
+        async function checkNicknameAvailability(nickname) {
+            const usersRef = ref(database, 'users');
+            const snapshot = await get(usersRef);
+            let nicknameAvailable = true;
 
+            snapshot.forEach((childSnapshot) => {
+                const userData = childSnapshot.val();
+                if (userData.nickname === nickname) {
+                    // اسم الشهرة موجود في قاعدة البيانات
+                    alert('عذرًا، اسم الشهرة مستخدم بالفعل. يرجى استخدام اسم شهرة آخر.');
+                    nicknameAvailable = false;
+                }
+            });
 
+            return nicknameAvailable;
+        }
+
+        // إضافة مستمع لحدث النقر على زر التسجيل
+        document.getElementById("signupButton").addEventListener("click", createUser);
 
 
 
