@@ -192,6 +192,8 @@
                 <br><br>
                 <a id="downloadLink3" href="https://drive.google.com/file/d/19vF8WGA9M9UpTmvVUhjYWf8pfLVpOB6Q/view?usp=drive_link">احدث اصدار لعبه هانج مان يعمل على الكمبيوتر ملف مضغوط قم بفك الضغط  واستمتع باللعبه ولا تنسى الصلاه على الحبيب </a>
                 <br><br>
+                <span id="hangman_count1"> عدد التحميلات: 0 </span>
+                <br><br>
                 <span id="hangman"> الله اكبر </span>
             </div>
             <!-- البرنامج الخامس -->
@@ -344,11 +346,27 @@
         }
         getLinkValue2()
 
+        // دالة لحضور قيمة الحقل link3 وعرضها بجوار عدد التحميلات
+        function getLinkValue3() {
+            const linkRef3 = ref(database, 'downloads/Downloads/link3');
+            // الحصول على قيمة الحقل link2 باستخدام get()
+            get(linkRef3).then((snapshot) => {
+                const newCount3 = snapshot.val();
+                // عرض قيمة الحقل link3 بجوار عدد التحميلات
+                document.getElementById('hangman_count1').textContent = "عدد التحميلات: " + newCount3;
+            }).catch(error => {
+                console.error('حدث خطأ أثناء جلب قيمة الحقل link3: ', error);
+            });
+        }
+        getLinkValue3()
+
         let newCount = 0; // متغير global لتخزين العداد الجديد
         let newCount2 = 0; // متغير global لتخزين العداد الجديد
+        let newcount3 = 0; // متغير global لتخزين العداد الجديد
 
         document.getElementById('downloadLink1').addEventListener('click', handleDownloadClick);
         document.getElementById('downloadLink2').addEventListener('click', handleDownloadClick2);
+        document.getElementById('downloadLink3').addEventListener('click', handleDownloadClick3);
         function handleDownloadClick(event) {
             // event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount();
@@ -357,6 +375,12 @@
             // event.preventDefault(); // منع السلوك الافتراضي للرابط
             updateDownloadCount2();
         }
+
+        function handleDownloadClick3(event) {
+            // event.preventDefault(); // منع السلوك الافتراضي للرابط
+            updateDownloadCount3();
+        }
+
         function updateDownloadCount() {
             const downloadRef = ref(database, 'downloads/Downloads/link1');
             get(downloadRef).then((snapshot) => {
@@ -374,6 +398,8 @@
                 console.error('حدث خطأ أثناء تحديث العداد: ', error);
             });
         }
+
+
         function updateDownloadCount2() {
             const downloadRef = ref(database, 'downloads/Downloads/link2');
             get(downloadRef).then((snapshot) => {
@@ -392,6 +418,26 @@
             });
         }
 
+
+
+
+        function updateDownloadCount3() {
+            const downloadRef = ref(database, 'downloads/Downloads/link3');
+            get(downloadRef).then((snapshot) => {
+                const data = snapshot.val();
+                if (data !== null && typeof data === 'number' && !isNaN(data)) {
+                    newCount3 = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
+                    return set(downloadRef, newCount3); // تحديث القيمة مباشرة
+                } else {
+                    console.log('العداد 3 غير موجود!');
+                }
+            }).then(() => {
+                console.log('تم تحديث العداد 3 بنجاح!');
+                document.getElementById('hangman_count1').textContent = "عدد التحميلات: " + newCount3;
+            }).catch(error => {
+                console.error(' 3 حدث خطأ أثناء تحديث العداد: ', error);
+            });
+        }
 
 
 
