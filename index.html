@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="Doctorr.ico">
+
+
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+
+    <div class="main-card">
+        <div class="date-container">
+            <span id="gregorian-date"></span> | <span id="current-time"></span>
+        </div>
+
+        <div class="main-card">
+    <div class="header">
+        <p class="date-text" id="full-date">جارٍ تحميل التاريخ...</p>
+
+        <img src="logo.png" alt="أكاديمية الدكتور" class="logo-image">
+
+        <h1>أكاديمية الدكتور 🎓</h1>
+        <p class="subtitle">مرحباً بك في مركز التحميل المطور</p>
+    </div>
+
+    </div>
+
+        <div class="project-item highlight">
+            <div class="project-info">
+                <span class="icon">🍎</span>
+                <div class="text">
+                    <h3>لعبة توتة (Tota Game)</h3>
+                    <p>إصدار 2026 - Unity 64-bit</p>
+                </div>
+            </div>
+            <a href="Tota.apk" download class="btn download">تحميل APK المطور 🚀</a>
+        </div>
+
+        <div class="project-item">
+            <div class="project-info">
+                <span class="icon">🕌</span>
+                <div class="text">
+                    <h3>مواقيت الصلاة</h3>
+                    <p id="prayer_times_count">عدد التحميلات: جاري التحميل...</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/Eldoctor.apk" class="btn android">نسخة الأندرويد 📱</a>
+                <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link" class="btn pc">نسخة الكمبيوتر 💻</a>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="project-info">
+                <span class="icon">🕹️</span>
+                <div class="text">
+                    <h3>لعبة Hangman</h3>
+                    <p id="hangman_count1">عدد التحميلات: جاري التحميل...</p>
+                </div>
+            </div>
+            <a id="downloadLink3" href="https://drive.google.com/file/d/19vF8WGA9M9UpTmvVUhjYWf8pfLVpOB6Q/view?usp=drive_link" class="btn pc">تحميل للكمبيوتر (ملف مضغوط) 📦</a>
+        </div>
+
+        <div class="project-item mini">
+            <p>تحميلات اليوتيوب: <span id="youtub">الله اكبر</span></p>
+        </div>
+
+        <div class="footer">
+            <p>جميع الحقوق محفوظة للدكتور © 2026</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+        // إعدادات Firebase اللي إنت بعتها (شغالة زي الفل)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
+            authDomain: "full-data-33872.firebaseapp.com",
+            databaseURL: "https://full-data-33872-default-rtdb.firebaseio.com",
+            projectId: "full-data-33872",
+            storageBucket: "full-data-33872.appspot.com",
+            messagingSenderId: "723846358285",
+            appId: "1:723846358285:web:d2b9d12ac80fb1cd90fc44"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase();
+
+        // دالة جلب عدادات التحميل من الداتا بيز
+        function loadCounts() {
+            const counts = [
+                { path: 'downloads/Downloads/link1', id: 'prayer_times_count' },
+                { path: 'downloads/Downloads/link2', id: 'prayer_times_count2' },
+                { path: 'downloads/Downloads/link3', id: 'hangman_count1' }
+            ];
+
+            counts.forEach(item => {
+                const linkRef = ref(database, item.path);
+                get(linkRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        document.getElementById(item.id).textContent = "عدد التحميلات: " + snapshot.val();
+                    }
+                });
+            });
+        }
+
+        // دالة تحديث الوقت (عشان الصفحة تبقى حية)
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById("gregorian-date").textContent = now.toLocaleDateString('ar-EG');
+            document.getElementById("current-time").textContent = now.toLocaleTimeString('ar-EG');
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        loadCounts();
+    </script>
+</body>
+</html>

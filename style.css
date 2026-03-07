@@ -1,0 +1,74 @@
+/* 🎨 تنسيق أكاديمية الدكتور - النسخة البروفشنال */
+:root {
+    --primary: #4f46e5;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex; /* عشان نضمن السنترة */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    direction: rtl; /* عشان التنسيق العربي يظبط */
+}
+
+/* الكارت الرئيسي هو اللي هيلم الليلة كلها في النص */
+.main-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    width: 90%;
+    max-width: 500px; /* مقاس بروفشنال للكارت */
+    text-align: center; /* سنترة الكلام جوه الكارت */
+}
+
+/* تنسيق الأيقونات والصور */
+.logo-image {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* تنسيق مربعات المشاريع */
+.project-item {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+/* سنترة محتوى المشروع */
+.project-info {
+    display: flex;
+    flex-direction: column; /* نخلي الإيموجي فوق الكلام */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* تنسيق الزراير عشان تبقى جنب بعض في النص */
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* سنترة الزراير */
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.android { background-color: #22c55e; }
+.pc { background-color: #3b82f6; }
+.download { background-color: var(--primary); width: 100%; display: block; }
