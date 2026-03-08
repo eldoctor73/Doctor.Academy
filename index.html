@@ -95,9 +95,10 @@
 
         // دالة التحميل لما الزائر يضغط
         window.startDownload = function() {
-            currentCount++; // بيزيد واحد فوراً عشان المصداقية هههه
+            currentCount++; // بيزيد واحد فوراً
             updateDisplay();
-            window.location.href = "Tota.apk"; // بيبدأ تحميل ملف اللعبة
+            // حط لينك الـ Release الجديد هنا بدل "Tota.apk"
+            window.location.href = "https://github.com/eldoctor73/Doctor.Academy/releases/download/2.0/eldoctor.apk";
         };
 
         // تحديث التاريخ والوقت
