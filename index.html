@@ -265,6 +265,7 @@
             GoogleAuthProvider,
             signInWithPopup,
             signInWithRedirect,
+            getRedirectResult,
             signOut,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
@@ -307,6 +308,21 @@
             return "عدد التحميلات: " + value;
         }
 
+        function describeAuthError(error) {
+            const code = error.code || "";
+            if (code === "auth/unauthorized-domain") return "هذا الدومين غير مسموح في إعدادات فايربيز.";
+            if (code === "auth/operation-not-allowed") return "تسجيل الدخول بجوجل غير مُفعّل في إعدادات فايربيز.";
+            if (code === "auth/account-exists-with-different-credential") return "هذا البريد مسجل بطريقة دخول أخرى.";
+            return "تعذر تسجيل الدخول. حاول مرة أخرى.";
+        }
+
+        getRedirectResult(auth).catch((error) => {
+            const code = error.code || "";
+            if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return;
+            showError(describeAuthError(error));
+            console.error("Google redirect error:", code, error.message);
+        });
+
         googleButton.addEventListener("click", async () => {
             authError.hidden = true;
             googleButton.disabled = true;
@@ -321,11 +337,7 @@
                 if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
                     return;
                 }
-                if (code === "auth/unauthorized-domain") {
-                    showError("هذا الدومين غير مسموح في إعدادات فايربيز.");
-                } else {
-                    showError("تعذر تسجيل الدخول. حاول مرة أخرى.");
-                }
+                showError(describeAuthError(error));
                 console.error("Google sign-in error:", error);
             } finally {
                 googleButton.disabled = false;
