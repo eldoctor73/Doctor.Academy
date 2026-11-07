@@ -66,8 +66,8 @@
                 color: #3c4043;
                 border: 1px solid #dadce0;
                 border-radius: 4px;
-                padding: 10px 24px;
-                font-size: 20px;
+                padding: 8px 18px;
+                font-size: 17px;
                 font-family: inherit;
                 cursor: pointer;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -90,16 +90,16 @@
                 flex: none;
             }
 
-            #loginMessage {
-                transition: all 0.3s;
-                margin: 5px 0 20px;
-                font-size: 22px;
-                color: blue;
-                font-weight: bold;
-                font-style: italic;
+            #authArea {
                 text-align: center;
-                line-height: 1.4;
-                text-decoration: underline;
+                margin-bottom: 10px;
+            }
+
+            .auth-hint {
+                margin: 0 0 15px;
+                font-size: 15px;
+                color: #555;
+                text-align: center;
             }
 
             .auth-error {
@@ -215,7 +215,7 @@
             <img src="Doctor.png" alt="أكاديمية" class="logo-image">
 
             <div id="authArea">
-                <p id="loginMessage">يرجى تسجيل الدخول بجوجل لرؤية التطبيقات.</p>
+                <p class="auth-hint">كل التطبيقات متاحة للجميع. التسجيل بجوجل اختياري.</p>
                 <button id="googleLogin" class="google-btn" type="button">
                     <svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -236,7 +236,7 @@
 
             <h1>تحديثات التطبيقات</h1>
 
-            <div id="appsArea" hidden>
+            <div id="appsArea">
                 <div class="app-update">
                     <h2>مواقيت الصلاة</h2>
                     <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/PrayerTime.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
@@ -304,7 +304,6 @@
 
         const authArea = document.getElementById("authArea");
         const userArea = document.getElementById("userArea");
-        const appsArea = document.getElementById("appsArea");
         const googleButton = document.getElementById("googleLogin");
         const authError = document.getElementById("authError");
 
@@ -408,14 +407,12 @@
             if (!user) {
                 authArea.hidden = false;
                 userArea.hidden = true;
-                appsArea.hidden = true;
                 authError.hidden = true;
                 return;
             }
 
             authArea.hidden = true;
             userArea.hidden = false;
-            appsArea.hidden = false;
 
             const photo = document.getElementById("userPhoto");
             if (user.photoURL) {
@@ -430,8 +427,9 @@
                 "مرحباً بك، " + (user.displayName || user.email || "");
 
             await saveProfile(user);
-            Object.keys(COUNTERS).forEach(loadCounter);
         });
+
+        Object.keys(COUNTERS).forEach(loadCounter);
 
         function pad(value) {
             return String(value).padStart(2, "0");

@@ -10,10 +10,10 @@
     },
     "downloads": {
       "Downloads": {
-        ".read": "auth != null",
-        "link1": { ".write": "auth != null" },
-        "link2": { ".write": "auth != null" },
-        "link3": { ".write": "auth != null" }
+        ".read": true,
+        "link1": { ".write": true },
+        "link2": { ".write": true },
+        "link3": { ".write": true }
       }
     },
     "version": {
