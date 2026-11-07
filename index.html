@@ -1,215 +1,289 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="Doctorr.ico">
 
-
         <title>Eldoctor.Academy</title>
         <style>
+            * { box-sizing: border-box; }
+
+            body {
+                margin: 0;
+                font-family: Arial, "Segoe UI", Tahoma, sans-serif;
+                background-color: #f9f9f9;
+            }
+
             .header-box {
                 background-image: linear-gradient(to bottom, #00FFFF, #FFFFFF);
-<!--            background-color: #00FFFF; /* لون خلفية بوكس العنوان */-->
-                padding: 10px; /* تقليل الهوامش الداخلية */
-                margin-bottom: 200px; /* هام للفصل بين العنوان والمحتوى */
-                display: flex; /* تحويل العناصر إلى عرض مرن */
-                flex-direction: column; /* ترتيب العناصر باتجاه العمود */
-                align-items: center; /* محاذاة العناصر بالوسط عموديًا */
-                position: relative; /* لتمكين التحكم في الموقع */
-<!--                max-height: 800px; /* تقليل الارتفاع */-->
-                max-height: 100vh; /* تعيين الارتفاع ليمتلئ بشكل كامل بارتفاع الشاشة */
-                margin: 0 auto; /* جعل البوكس في وسط الصفحة */
+                padding: 10px;
+                margin: 0 auto 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+                min-height: 100vh;
+            }
+
+            .datetime-bar {
+                font-size: 15px;
+                color: #333;
+                text-align: center;
+                line-height: 1.8;
             }
 
             .logo-image {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-                width: 100vw; /* تعيين العرض بنسبة 100٪ من عرض الشاشة */
-                height: 250px; /* تحديد الارتفاع بقيمة ثابتة بالبكسل */
-                max-width: 600px; /* تحديد الحد الأقصى للعرض */
-                max-height: 150px; /* تحديد الحد الأقصى للارتفاع */
-                margin-bottom: 15px; /* تباعد بين الصورة والعنوان */
+                transition: all 0.3s;
+                width: 100%;
+                max-width: 600px;
+                max-height: 150px;
+                object-fit: contain;
+                margin-bottom: 15px;
             }
+
             .logo-image:hover {
-                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
+                transform: scale(1.1);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
             }
+
             h1 {
                 color: #333;
                 margin-top: 20px;
                 font-size: 48px;
                 font-weight: bold;
+                text-align: center;
             }
-            .app-update {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-                flex-direction: column;
+
+            /* زر تسجيل الدخول بجوجل */
+            .google-btn {
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                display: none;
-                border-radius: 20px;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-                margin: 20px auto;
-                padding: 20px;
-                max-width: 60%;
-                text-align: center;
-                background-color: #f5f5f5;
-                border: 2px solid #ddd;
-            }
-            .app-update:hover {
-                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
+                gap: 12px;
+                transition: all 0.3s;
+                background-color: #ffffff;
+                color: #3c4043;
+                border: 1px solid #dadce0;
+                border-radius: 4px;
+                padding: 10px 24px;
+                font-size: 20px;
+                font-family: inherit;
+                cursor: pointer;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
             }
 
-
-            a {
-                color: blue; /* تغيير لون الروابط إلى اللون الأزرق */
+            .google-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
             }
 
-
-            /* ألوان البوكسات */
-            .app-update:nth-child(odd) {
-                background-color: #b3e5fc; /* لون البوكسات الفردية (أزرق فاتح) */
-            }
-            .app-update:nth-child(even) {
-                display: none;
-                background-color: #c8e6c9; /* لون البوكسات الزوجية (أخضر فاتح) */
-            }
-            /* أنماط للزرارين */
-            #loginButton, #signupButton {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-                background-color: #008CBA; /* لون خلفية الزر */
-                width: 200; /* العرض */
-                color: white; /* لون النص */
-                border: none; /* إزالة الحدود */
-                padding: 10px 20px; /* مساحة الحشو داخل الزر */
-                text-align: center; /* محاذاة النص في الوسط */
-                margin: 10px; /* تباعد بين الأزرار */
-                border-radius: 5px; /* إضافة زوايا مستديرة */
-                cursor: pointer; /* تغيير المؤشر إلى شكل يد تشير إلى النقر */
-                font-size: 20px; /* تحديد حجم الخط */
-            }
-            /* تنسيق عند تحويل المؤشر إلى الزر */
-            #loginButton:hover, #signupButton:hover {
-                background-color: #005F6B; /* تغيير لون الخلفية عند تحويل المؤشر إليه */
-                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
-            }
-            /* تنسيق حقل اسم المستخدم */
-            input[type="text"], input[type="password"] {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-                width: 35%; /* العرض */
-                padding: 10px; /* الحشو */
-                margin: 10px; /* التباعد */
-                border: 1px solid #ccc; /* الحدود */
-                border-radius: 5px; /* زوايا مستديرة */
-                font-size: 20px; /* حجم الخط */
-            }
-            input[type="text"]:hover, input[type="password"]:hover {
-                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
-            }
-            #welcomeMessage {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-
-                display: none; /* يكون مخفياً بشكل افتراضي */
-                background-color: #4CAF50; /* لون خلفية العنصر */
-                color: white; /* لون النص */
-                font-family: Arial, sans-serif; /* نوع الخط */
-                font-size: 24px; /* حجم الخط */
-                padding: 20px; /* تباعد داخلي للعنصر */
-                border: 2px solid #4CAF50; /* حدود العنصر */
-                border-radius: 10px; /* زوايا مستديرة */
-                margin-top: 20px; /* تباعد بين العنصر والعناصر الأخرى */
-                text-align: center; /* محاذاة النص في الوسط */
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* ظل للعنصر */
-                transition: 0.3s; /* تأثير تغيير الحجم */
+            .google-btn:disabled {
+                opacity: 0.6;
+                cursor: progress;
+                transform: none;
             }
 
-            #welcomeMessage:hover {
-                transform: scale(1.05); /* تكبير العنصر عند التحويم بالماوس */
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* تغيير ظل العنصر */
+            .google-icon {
+                width: 28px;
+                height: 28px;
+                flex: none;
             }
 
             #loginMessage {
-                transition: all 0.3s; /* تأثير التحويل الافتراضي لجميع الخصائص */
-                margin-top: 5px; /* تباعد بين العنصر والعناصر الأخرى */
+                transition: all 0.3s;
+                margin: 5px 0 20px;
                 font-size: 22px;
-                font-family: Arial, sans-serif;
                 color: blue;
                 font-weight: bold;
                 font-style: italic;
                 text-align: center;
-                line-height: 0.5;
+                line-height: 1.4;
                 text-decoration: underline;
-                text-transform: uppercase;
-            }
-            #loginMessage:hover {
-                transform: scale(1.1); /* زيادة الحجم عند تحويل الماوس */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* ظل للعنصر */
             }
 
+            .auth-error {
+                color: #c0392b;
+                font-weight: bold;
+                font-size: 16px;
+                text-align: center;
+                margin-top: 12px;
+            }
 
+            #userArea {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .user-photo {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                background-color: #fff;
+            }
+
+            #welcomeMessage {
+                transition: all 0.3s;
+                display: inline-block;
+                background-color: #4CAF50;
+                color: white;
+                font-size: 20px;
+                padding: 10px 20px;
+                border: 2px solid #4CAF50;
+                border-radius: 10px;
+                margin: 10px 10px 10px 0;
+                text-align: center;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            #welcomeMessage:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            #logoutButton {
+                transition: all 0.3s;
+                background-color: #555;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 8px 16px;
+                font-size: 16px;
+                font-family: inherit;
+                cursor: pointer;
+            }
+
+            #logoutButton:hover {
+                background-color: #333;
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            }
+
+            .app-update {
+                transition: all 0.3s;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                margin: 20px auto;
+                padding: 20px;
+                width: 90%;
+                max-width: 700px;
+                text-align: center;
+                background-color: #b3e5fc;
+                border: 2px solid #ddd;
+                line-height: 1.9;
+            }
+
+            .app-update:hover {
+                transform: scale(1.02);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+            }
+
+            .app-update h2 {
+                margin: 0 0 10px;
+            }
+
+            a {
+                color: blue;
+            }
+
+            .old-version-note {
+                color: #c0392b;
+                font-size: 14px;
+            }
+
+            [hidden] { display: none !important; }
+
+            @media (max-width: 600px) {
+                h1 { font-size: 30px; }
+                .google-btn { font-size: 17px; padding: 10px 16px; }
+                #loginMessage { font-size: 18px; }
+            }
         </style>
     </head>
     <body>
         <div class="header-box">
-            <span id="gregorian-date"></span>
-            <span id="hijri-date"></span>
-            <span id="current-time"></span><br>
-            <img src="Doctor.png" alt="أكاديمية" class="logo-image"><br>
-            <p id="welcomeMessage" style="display: none;"></p>
-            <p id="loginMessage" >يرجى تسجيل الدخول لرؤية التطبيقات.</p>
-            <!-- حقل اسم المستخدم -->
-            <input type="text" id="username" name="username" placeholder=" ...اكتب ايميلك هنا ">
-            <!-- حقل كلمة المرور -->
-            <input type="password" id="password" name="password" placeholder=" ...كلمة المرور">
-            <!-- زر تسجيل الدخول -->
-            <button id="loginButton">تسجيل الدخول</button>
-            <!-- زر إنشاء مستخدم جديد -->
-            <a href="register.html" id="signupButton">إنشاء مستخدم جديد</a>
-            <h1>تحديثات التطبيقات</h1>
-            <div class="app-update">
-                <h2>مواقيت الصلاة</h2>
-                <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/PrayerTime.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
-                <br>
-                <span style="color:#c0392b; font-size:14px;">لو النسخة القديمة متسطبة عندك امسحها الاول وبعدين ثبت النسخة الجديدة</span>
-                <br><br>
-                <span id="prayer_times_count"> عدد التحميلات: 0 </span>
-                <br><br>
-                <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
-                <br><br>
-                <span id="prayer_times_count2"> عدد التحميلات: 0 </span>
-                <br><br>
-                <span id="prayer_times"> الله اكبر </span>
+            <div class="datetime-bar">
+                <div id="gregorian-date"></div>
+                <div id="hijri-date"></div>
+                <div id="current-time"></div>
+            </div>
+            <img src="Doctor.png" alt="أكاديمية" class="logo-image">
 
+            <div id="authArea">
+                <p id="loginMessage">يرجى تسجيل الدخول بجوجل لرؤية التطبيقات.</p>
+                <button id="googleLogin" class="google-btn" type="button">
+                    <svg class="google-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span>تسجيل الدخول بجوجل</span>
+                </button>
+                <p id="authError" class="auth-error" hidden></p>
             </div>
-            <!-- تحميلات اليوتيوب -->
-            <div class="app-update">
-                <h2>تحميلات اليوتيوب</h2>
-                <span id="youtub"> الله اكبر </span>
+
+            <div id="userArea" hidden>
+                <img id="userPhoto" class="user-photo" alt="">
+                <p id="welcomeMessage"></p>
+                <div><button id="logoutButton" type="button">تسجيل الخروج</button></div>
             </div>
-            <!-- لعبة Hangman -->
-            <div class="app-update">
-                <h2>لعبة Hangman</h2>
-                <br><br>
-                <a id="downloadLink3" href="https://drive.google.com/file/d/19vF8WGA9M9UpTmvVUhjYWf8pfLVpOB6Q/view?usp=drive_link">احدث اصدار لعبه هانج مان يعمل على الكمبيوتر ملف مضغوط قم بفك الضغط  واستمتع باللعبه ولا تنسى الصلاه على الحبيب </a>
-                <br><br>
-                <span id="hangman_count1"> عدد التحميلات: 0 </span>
-                <br><br>
-                <span id="hangman"> الله اكبر </span>
-            </div>
-            <!-- البرنامج الخامس -->
-            <div class="app-update">
-                <h2>البرنامج الخامس</h2>
-                <span id="program5"> الله اكبر </span>
+
+            <h1>تحديثات التطبيقات</h1>
+
+            <div id="appsArea" hidden>
+                <div class="app-update">
+                    <h2>مواقيت الصلاة</h2>
+                    <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/PrayerTime.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
+                    <br>
+                    <span class="old-version-note">لو النسخة القديمة متسطبة عندك امسحها الاول وبعدين ثبت النسخة الجديدة</span>
+                    <br><br>
+                    <span id="prayer_times_count"> عدد التحميلات: 0 </span>
+                    <br><br>
+                    <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
+                    <br><br>
+                    <span id="prayer_times_count2"> عدد التحميلات: 0 </span>
+                    <br><br>
+                    <span id="prayer_times"> الله اكبر </span>
+                </div>
+
+                <div class="app-update">
+                    <h2>تحميلات اليوتيوب</h2>
+                    <span id="youtub"> الله اكبر </span>
+                </div>
+
+                <div class="app-update">
+                    <h2>لعبة Hangman</h2>
+                    <a id="downloadLink3" href="https://drive.google.com/file/d/19vF8WGA9M9UpTmvVUhjYWf8pfLVpOB6Q/view?usp=drive_link">احدث اصدار لعبه هانج مان يعمل على الكمبيوتر ملف مضغوط قم بفك الضغط واستمتع باللعبه ولا تنسى الصلاه على الحبيب</a>
+                    <br><br>
+                    <span id="hangman_count1"> عدد التحميلات: 0 </span>
+                    <br><br>
+                    <span id="hangman"> الله اكبر </span>
+                </div>
+
+                <div class="app-update">
+                    <h2>البرنامج الخامس</h2>
+                    <span id="program5"> الله اكبر </span>
+                </div>
             </div>
         </div>
 
     <script type="module">
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-        import { getDatabase, ref, update, onValue, set, child, push, runTransaction,get } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signInWithRedirect,
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+        import { getDatabase, ref, get, set, runTransaction } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAlUm5gWYTmUsIALYdH2oRyj5ZbfF0OxaQ",
@@ -222,236 +296,156 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const database  = getDatabase();
+        const auth = getAuth(app);
+        const database = getDatabase(app);
 
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: "select_account" });
 
+        const authArea = document.getElementById("authArea");
+        const userArea = document.getElementById("userArea");
+        const appsArea = document.getElementById("appsArea");
+        const googleButton = document.getElementById("googleLogin");
+        const authError = document.getElementById("authError");
 
+        const COUNTERS = {
+            downloadLink1: { path: "downloads/Downloads/link1", el: "prayer_times_count" },
+            downloadLink2: { path: "downloads/Downloads/link2", el: "prayer_times_count2" },
+            downloadLink3: { path: "downloads/Downloads/link3", el: "hangman_count1" }
+        };
 
+        function showError(message) {
+            authError.textContent = message;
+            authError.hidden = false;
+        }
 
-        // دالة للتحقق من صحة بيانات تسجيل الدخول
-        function validateLogin(username, password) {
-            const usersRef = ref(database, 'users');
-            return get(usersRef).then(snapshot => {
+        function formatCounts(value) {
+            return "عدد التحميلات: " + value;
+        }
+
+        googleButton.addEventListener("click", async () => {
+            authError.hidden = true;
+            googleButton.disabled = true;
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                const code = error.code || "";
+                if (code === "auth/popup-blocked" || code === "auth/operation-not-supported-in-this-environment") {
+                    await signInWithRedirect(auth, provider);
+                    return;
+                }
+                if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+                    return;
+                }
+                if (code === "auth/unauthorized-domain") {
+                    showError("هذا الدومين غير مسموح في إعدادات فايربيز.");
+                } else {
+                    showError("تعذر تسجيل الدخول. حاول مرة أخرى.");
+                }
+                console.error("Google sign-in error:", error);
+            } finally {
+                googleButton.disabled = false;
+            }
+        });
+
+        document.getElementById("logoutButton").addEventListener("click", () => signOut(auth));
+
+        async function saveProfile(user) {
+            try {
+                const profileRef = ref(database, "users/" + user.uid);
+                const snapshot = await get(profileRef);
+                const basic = {
+                    name: user.displayName || "",
+                    email: user.email || "",
+                    photo: user.photoURL || ""
+                };
                 if (snapshot.exists()) {
-                    const users = snapshot.val();
-                    for (const userKey in users) {
-                        if (users[userKey].email === username && users[userKey].password === password) {
-                            return true; // البيانات صحيحة
-
-
-
-                        }
-                    }
-                }
-                return false; // البيانات غير صحيحة
-            });
-        }
-
-         // دالة للتعامل مع النقر على زر تسجيل الدخول
-        function handleLogin() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            signInWithEmailAndPassword(getAuth(), username, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    if (!user.emailVerified) {
-                        alert("يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول.");
-                        return;
-                    }
-
-                    validateLogin(username, password).then(valid => {
-                        if (valid) {
-                            alert("تم تسجيل الدخول بنجاح!");
-                            // إخفاء حقلي اسم المستخدم وكلمة المرور وزر تسجيل الدخول
-                            document.getElementById("username").style.display = "none";
-                            document.getElementById("password").style.display = "none";
-                            document.getElementById("loginButton").style.display = "none";
-                            document.getElementById("signupButton").style.display = "none";
-                            document.getElementById("loginMessage").style.display = "none";
-
-                            // إظهار العناصر المناسبة بعد تسجيل الدخول بنجاح
-                            const appUpdates = document.querySelectorAll(".app-update");
-                            appUpdates.forEach(update => {
-                                update.style.display = "block";
-                            });
-                            displayWelcomeMessage(username);
-
-                            // هنا يمكنك توجيه المستخدم إلى الصفحة المطلوبة
-                        } else {
-                            alert('فشل تسجيل الدخول. يرجى التحقق من البيانات.');
-                        }
-                    }).catch(error => {
-                        console.error("حدث خطأ أثناء التحقق من بيانات تسجيل الدخول:", error);
-                    });
-                })
-                .catch((error) => {
-                    alert('فشل تسجيل الدخول. تأكد من تطابق البريد الإلكتروني وكلمة المرور.');
-                    console.error("حدث خطأ أثناء محاولة تسجيل الدخول:", error);
-                });
-        }
-
-
-        // إضافة استماع للنقر على زر تسجيل الدخول وتعيين الدالة handleLogin كوظيفة تنفيذ عند النقر
-        document.getElementById("loginButton").addEventListener("click", handleLogin);
-
-        function displayWelcomeMessage(username) {
-            const usersRef = ref(database, 'users');
-            get(usersRef).then(snapshot => {
-                if (snapshot.exists()) {
-                    const users = snapshot.val();
-                    for (const userKey in users) {
-                        if (users[userKey].email === username) {
-                            const welcomeMessage = document.getElementById("welcomeMessage");
-                            welcomeMessage.textContent = `مرحباً بك، ${users[userKey].nickname}!`;
-                            welcomeMessage.style.display = "block";
-                            break;
-                        }
-                    }
-                }
-            }).catch(error => {
-                console.error("حدث خطأ أثناء عرض رسالة الترحيب:", error);
-            });
-        }
-
-
-
-
-
-        // دالة لحضور قيمة الحقل link1 وعرضها بجوار عدد التحميلات
-        function getLinkValue() {
-            const linkRef = ref(database, 'downloads/Downloads/link1');
-            // الحصول على قيمة الحقل link1 باستخدام get()
-            get(linkRef).then((snapshot) => {
-                const newCount = snapshot.val();
-                // عرض قيمة الحقل link1 بجوار عدد التحميلات
-                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-            }).catch(error => {
-                console.error('حدث خطأ أثناء جلب قيمة الحقل link1: ', error);
-            });
-        }
-
-        // استدعاء الدالة initializePage عند تحميل الصفحة
-        getLinkValue();
-
-        // دالة لحضور قيمة الحقل link2 وعرضها بجوار عدد التحميلات
-        function getLinkValue2() {
-            const linkRef2 = ref(database, 'downloads/Downloads/link2');
-            // الحصول على قيمة الحقل link2 باستخدام get()
-            get(linkRef2).then((snapshot) => {
-                const newCount2 = snapshot.val();
-                // عرض قيمة الحقل link2 بجوار عدد التحميلات
-                document.getElementById('prayer_times_count2').textContent = "عدد التحميلات: " + newCount2;
-            }).catch(error => {
-                console.error('حدث خطأ أثناء جلب قيمة الحقل link2: ', error);
-            });
-        }
-        getLinkValue2()
-
-        // دالة لحضور قيمة الحقل link3 وعرضها بجوار عدد التحميلات
-        function getLinkValue3() {
-            const linkRef3 = ref(database, 'downloads/Downloads/link3');
-            // الحصول على قيمة الحقل link2 باستخدام get()
-            get(linkRef3).then((snapshot) => {
-                const newCount3 = snapshot.val();
-                // عرض قيمة الحقل link3 بجوار عدد التحميلات
-                document.getElementById('hangman_count1').textContent = "عدد التحميلات: " + newCount3;
-            }).catch(error => {
-                console.error('حدث خطأ أثناء جلب قيمة الحقل link3: ', error);
-            });
-        }
-        getLinkValue3()
-
-        let newCount = 0; // متغير global لتخزين العداد الجديد
-        let newCount2 = 0; // متغير global لتخزين العداد الجديد
-        let newcount3 = 0; // متغير global لتخزين العداد الجديد
-
-        document.getElementById('downloadLink1').addEventListener('click', handleDownloadClick);
-        document.getElementById('downloadLink2').addEventListener('click', handleDownloadClick2);
-        document.getElementById('downloadLink3').addEventListener('click', handleDownloadClick3);
-        function handleDownloadClick(event) {
-            // event.preventDefault(); // منع السلوك الافتراضي للرابط
-            updateDownloadCount();
-        }
-        function handleDownloadClick2(event) {
-            // event.preventDefault(); // منع السلوك الافتراضي للرابط
-            updateDownloadCount2();
-        }
-
-        function handleDownloadClick3(event) {
-            // event.preventDefault(); // منع السلوك الافتراضي للرابط
-            updateDownloadCount3();
-        }
-
-        function updateDownloadCount() {
-            const downloadRef = ref(database, 'downloads/Downloads/link1');
-            get(downloadRef).then((snapshot) => {
-                const data = snapshot.val();
-                if (data !== null && typeof data === 'number' && !isNaN(data)) {
-                    newCount = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
-                    return set(downloadRef, newCount); // تحديث القيمة مباشرة
+                    await set(profileRef, Object.assign({}, snapshot.val(), basic));
                 } else {
-                    console.log('العداد غير موجود!');
+                    basic.createdAt = Date.now();
+                    await set(profileRef, basic);
                 }
-            }).then(() => {
-                console.log('تم تحديث العداد بنجاح!');
-                document.getElementById('prayer_times_count').textContent = "عدد التحميلات: " + newCount;
-            }).catch(error => {
-                console.error('حدث خطأ أثناء تحديث العداد: ', error);
+            } catch (error) {
+                console.error("Could not save profile:", error);
+            }
+        }
+
+        async function loadCounter(key) {
+            const counter = COUNTERS[key];
+            try {
+                const snapshot = await get(ref(database, counter.path));
+                const value = snapshot.val();
+                if (typeof value === "number") {
+                    document.getElementById(counter.el).textContent = formatCounts(value);
+                }
+            } catch (error) {
+                console.error("Could not load " + key + ":", error);
+            }
+        }
+
+        function bumpCounter(key) {
+            const counter = COUNTERS[key];
+            const counterRef = ref(database, counter.path);
+            runTransaction(counterRef, (current) => {
+                return typeof current === "number" ? current + 1 : 1;
+            }).then((result) => {
+                if (result.committed && typeof result.snapshot.val() === "number") {
+                    document.getElementById(counter.el).textContent = formatCounts(result.snapshot.val());
+                }
+            }).catch((error) => {
+                console.error("Could not update " + key + ":", error);
             });
         }
 
+        Object.keys(COUNTERS).forEach((key) => {
+            const element = document.getElementById(key);
+            if (element) {
+                element.addEventListener("click", () => bumpCounter(key));
+            }
+        });
 
-        function updateDownloadCount2() {
-            const downloadRef = ref(database, 'downloads/Downloads/link2');
-            get(downloadRef).then((snapshot) => {
-                const data = snapshot.val();
-                if (data !== null && typeof data === 'number' && !isNaN(data)) {
-                    newCount2 = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
-                    return set(downloadRef, newCount2); // تحديث القيمة مباشرة
-                } else {
-                    console.log('العداد 2 غير موجود!');
-                }
-            }).then(() => {
-                console.log('تم تحديث العداد 2 بنجاح!');
-                document.getElementById('prayer_times_count2').textContent = "عدد التحميلات: " + newCount2;
-            }).catch(error => {
-                console.error(' 2 حدث خطأ أثناء تحديث العداد: ', error);
-            });
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                authArea.hidden = false;
+                userArea.hidden = true;
+                appsArea.hidden = true;
+                authError.hidden = true;
+                return;
+            }
+
+            authArea.hidden = true;
+            userArea.hidden = false;
+            appsArea.hidden = false;
+
+            const photo = document.getElementById("userPhoto");
+            if (user.photoURL) {
+                photo.src = user.photoURL;
+                photo.referrerPolicy = "no-referrer";
+                photo.hidden = false;
+            } else {
+                photo.hidden = true;
+            }
+
+            document.getElementById("welcomeMessage").textContent =
+                "مرحباً بك، " + (user.displayName || user.email || "");
+
+            await saveProfile(user);
+            Object.keys(COUNTERS).forEach(loadCounter);
+        });
+
+        function pad(value) {
+            return String(value).padStart(2, "0");
         }
-
-
-
-
-        function updateDownloadCount3() {
-            const downloadRef = ref(database, 'downloads/Downloads/link3');
-            get(downloadRef).then((snapshot) => {
-                const data = snapshot.val();
-                if (data !== null && typeof data === 'number' && !isNaN(data)) {
-                    newCount3 = parseInt(data, 10) + 1; // زيادة العداد بمقدار واحد
-                    return set(downloadRef, newCount3); // تحديث القيمة مباشرة
-                } else {
-                    console.log('العداد 3 غير موجود!');
-                }
-            }).then(() => {
-                console.log('تم تحديث العداد 3 بنجاح!');
-                document.getElementById('hangman_count1').textContent = "عدد التحميلات: " + newCount3;
-            }).catch(error => {
-                console.error(' 3 حدث خطأ أثناء تحديث العداد: ', error);
-            });
-        }
-
-
 
         function updateDateTime() {
             const now = new Date();
-            const gregorianDateElement = document.getElementById("gregorian-date");
-            const hijriDateElement = document.getElementById("hijri-date");
-            const currentTimeElement = document.getElementById("current-time");
-
-            gregorianDateElement.textContent = "التاريخ الميلادي: " + now.toLocaleDateString('en-US');
-            hijriDateElement.textContent = "التاريخ الهجري: " + "تاريخ هجري غير معروف";
-            currentTimeElement.textContent = "الوقت الحالي: " + now.toLocaleTimeString('en-US');
+            const longDate = { day: "numeric", month: "long", year: "numeric" };
+            document.getElementById("gregorian-date").textContent =
+                "التاريخ الميلادي: " + now.toLocaleDateString("ar-EG-u-nu-latn", longDate);
+            document.getElementById("hijri-date").textContent =
+                "التاريخ الهجري: " + now.toLocaleDateString("ar-SA-u-ca-islamic-umalqura-nu-latn", longDate);
+            document.getElementById("current-time").textContent =
+                "الوقت الحالي: " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
         }
 
         setInterval(updateDateTime, 1000);

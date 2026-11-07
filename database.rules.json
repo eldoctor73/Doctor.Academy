@@ -1,0 +1,23 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "downloads": {
+      "Downloads": {
+        ".read": "auth != null",
+        "link1": { ".write": "auth != null" },
+        "link2": { ".write": "auth != null" },
+        "link3": { ".write": "auth != null" }
+      }
+    },
+    "version": {
+      ".read": true
+    }
+  }
+}
