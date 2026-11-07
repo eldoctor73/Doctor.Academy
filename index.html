@@ -316,7 +316,16 @@
             return "تعذر تسجيل الدخول. حاول مرة أخرى.";
         }
 
-        getRedirectResult(auth).catch((error) => {
+        const REDIRECT_FLAG = "googleRedirectPending";
+        const cameBackFromRedirect = sessionStorage.getItem(REDIRECT_FLAG) === "1";
+
+        getRedirectResult(auth).then((result) => {
+            sessionStorage.removeItem(REDIRECT_FLAG);
+            if (!result && cameBackFromRedirect) {
+                showError("لم يكتمل تسجيل الدخول. اسمح بالنوافذ المنبثقة ثم حاول مرة أخرى.");
+            }
+        }).catch((error) => {
+            sessionStorage.removeItem(REDIRECT_FLAG);
             const code = error.code || "";
             if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return;
             showError(describeAuthError(error));
@@ -331,6 +340,7 @@
             } catch (error) {
                 const code = error.code || "";
                 if (code === "auth/popup-blocked" || code === "auth/operation-not-supported-in-this-environment") {
+                    sessionStorage.setItem(REDIRECT_FLAG, "1");
                     await signInWithRedirect(auth, provider);
                     return;
                 }
