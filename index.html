@@ -226,9 +226,11 @@
             <div id="appsArea">
                 <div class="app-update">
                     <h2>مواقيت الصلاة</h2>
-                    <a id="downloadLink1" href="https://github.com/eldoctor73/apks/raw/main/PrayerTime.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
+                    <a id="downloadLink1" href="https://github.com/eldoctor73/PrayerTime/raw/main/PrayerTime.apk">احدث اصدار رابط مواقيت الصلاة يعمل على الاندرويد</a>
                     <br><br>
                     <span id="prayer_times_count"> عدد التحميلات: 0 </span>
+                    <br><br>
+                    <span id="prayer_app_version"> الإصدار: 6.9 </span>
                     <br><br>
                     <a id="downloadLink2" href="https://drive.google.com/file/d/1TTn93OZN8GkZa4wUTeuSMTSvsvV79v1z/view?usp=drive_link">احدث اصدار رابط مواقيت الصلاة يعمل على الكمبيوتر</a>
                     <br><br>
@@ -312,6 +314,16 @@
                 const version = (value || "").trim();
                 if (version) {
                     document.getElementById("fruitgame_version").textContent = "الإصدار: " + version;
+                }
+            })
+            .catch(() => {});
+
+        fetch("https://raw.githubusercontent.com/eldoctor73/PrayerTime/main/version.txt")
+            .then((response) => (response.ok ? response.text() : ""))
+            .then((value) => {
+                const version = (value || "").trim();
+                if (version) {
+                    document.getElementById("prayer_app_version").textContent = "الإصدار: " + version;
                 }
             })
             .catch(() => {});
